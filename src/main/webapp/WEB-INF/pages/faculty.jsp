@@ -26,63 +26,50 @@
 								<th class="about">About</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1st year</td>
-								<td>Mathematics-1</td>
-								<td>Gujjala Anjaneya vara prasad</td>
-								<td>98989899798</td>
-								<td>GujjalaAnjaneyavaraprasad@gmail.com</td>
-								<td><img src="images/bird1.png" name="image"
-									class="imageSpace" /></td>
-								<td>EMA organizes various events/projects/conferences in
-									different countries ranging from those focused on developing
-									additional soft skills of our membership to those focused on
-									raising awareness of various issues affecting our societies.</td>
-							</tr>
-							<tr>
-								<td>1st year</td>
-								<td>Mathematics-2</td>
-								<td>Gujjala Anjaneya vara prasad</td>
-								<td>98989899798</td>
-								<td style="word-wrap: break-word;">facultyemail3@gmail.com</td>
-								<td><img src="images/bird.jpg" name="image"
-									class="imageSpace" /></td>
-								<td>EMA organizes various events/projects/conferences in
-									different countries ranging from those focused on developing
-									additional soft skills of our membership to those focused on
-									raising awareness of various issues affecting our societies.</td>
-							</tr>
-							<tr>
-								<td>1st year</td>
-								<td>Physics</td>
-								<td>facultyname</td>
-								<td>97798687796</td>
-								<td>facultyemail3@gmail.com</td>
-								<td><img src="images/bird1.png" name="image"
-									class="imageSpace" /></td>
-								<td>EMA organizes various events/projects/conferences in
-									different countries ranging from those focused on developing
-									additional soft skills of our membership to those focused on
-									raising awareness of various issues affecting our societies.</td>
-							</tr>
-							<tr>
-								<td>2nd year</td>
-								<td>Mathematics-2</td>
-								<td>facultyname
-								<td>97798687796</td>
-								<td>facultyemail3@gmail.com</td>
-								<td><img src="images/bird.jpg" name="image"
-									class="imageSpace" /></td>
-								<td>EMA organizes various events/projects/conferences in
-									different countries ranging from those focused on developing
-									additional soft skills of our membership to those focused on
-									raising awareness of various issues affecting our societies.</td>
-							</tr>
+						<tbody id="itemContainer">
+						
 						</tbody>
+						
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+var listOrders1 =${facultyDetails};
+display(listOrders1);
+
+function display(listOrders1){
+	if (listOrders1 != null){
+		$.each(listOrders1, function(i, orderObj) {
+			if(orderObj.facultyName == null || orderObj.facultyName ==''){
+				 orderObj.facultyName = "---";
+			 }
+			 if(orderObj.contact == null){
+				 orderObj.contact = "---";
+			 }
+			 if(orderObj.email == null){
+				 orderObj.email = "---";
+			 }
+			 if(orderObj.aboutFaculty == null){
+				 orderObj.aboutFaculty = "---";
+			 }
+			var tblRow= "<tr>"
+						+"<td>"+orderObj.year+"</td>"
+						+"<td>"+orderObj.subject+"</td>"
+						+"<td>"+orderObj.facultyName+"</td>"
+						+"<td>"+orderObj.contact+"</td>"
+						+"<td style='word-wrap: break-word;'>"+orderObj.email+"</td>"
+						+"<td><img src='"+orderObj.facultyPhotoPath+"' name='image' class='imageSpace' /></td>"
+						+"<td>"+orderObj.aboutFaculty+" </td>"
+					+"</tr>"
+			 
+			  tblRow=  tblRow.replace(/\"/g, "");
+					$("#itemContainer").append(tblRow);
+		});
+					}
+	
+}
+</script>

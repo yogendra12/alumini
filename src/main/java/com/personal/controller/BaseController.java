@@ -82,13 +82,34 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/facultyHome")
-	public String getFacultyHomePage(ModelMap model) {
+	public String getFacultyHomePage(ModelMap model, HttpServletRequest request) {
 		System.out.println("alumini page...");
+		List<FacultyInfo> listFacultyInfo = null;
+		String responce = null;
+		try{
+			listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
+			ObjectMapper mapper = new ObjectMapper();
+			responce = mapper.writeValueAsString(listFacultyInfo);
+			request.setAttribute("facultyDetails", responce);
+		}catch(Exception e){
+			
+		}
+		
 		return "faculty";
 	}
 	@RequestMapping(value = "/facultyentry")
-	public String getFacultyEntry(ModelMap model) {
-		System.out.println("alumini page...");
+	public String getFacultyEntry(ModelMap model, HttpServletRequest objRequest) {
+
+		List<FacultyInfo> listFacultyInfo = null;
+		String json  = "";
+		try {
+			listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
+			ObjectMapper mapper = new ObjectMapper();
+			json = mapper.writeValueAsString(listFacultyInfo);
+			 objRequest.setAttribute("facultyOrders", json);
+		} catch (Exception e) {
+			log.error("Exception in getting rollnos", e);
+		}
 		return "facreg";
 	}
 

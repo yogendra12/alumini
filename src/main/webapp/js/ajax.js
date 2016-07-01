@@ -12,7 +12,7 @@ jQuery.fn.makeMultipartRequest = function(method, url, processData, formData,
 		contentType : contentType,
 		dataType : dataType,
 		success : successFunction,
-		error :  function(){alert("error")}
+		error :  function(e){console.log(e);}
 	});
 };
 

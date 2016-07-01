@@ -117,26 +117,33 @@ public class RegistrationController {
 			HttpServletRequest request,HttpSession session) {
 		  String res = "fail";
 		try {
-			PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
-			if(sessinBean != null){
+			System.out.println("inside spouse........");
+			/*PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
+			if(sessinBean != null){*/
 				
-				PersonalInfo dbObject = personalDao.getPersonalInfo(sessinBean.getRollNo());
+				//PersonalInfo dbObject = personalDao.getPersonalInfo(sessinBean.getRollNo());
+			PersonalInfo dbObject = personalDao.getPersonalInfo("87EC101");
 				if(dbObject != null){
 					dbObject.setSpouseName(personal.getSpouseName());
 					dbObject.setAboutSouse(personal.getAboutSouse());
 					dbObject.setSpousePhoto(personal.getSpousePhoto());
+					System.out.println("bfore");
 					if(personalDao.updatePersonalInfo(dbObject)){
+						System.out.println("bfore");
 						childInfo.setRollNo(dbObject.getRollNo());
+						System.out.println("bfore child");
 						boolean isChildSave = childInfoDao.saveChildrenInfo(childInfo);
+						System.out.println("bfore child"+isChildSave);
 						if(isChildSave){
 							res = "success";	
 						}
 					}
 				}
-			}
+			//}
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.error("Exception in RegistrationController", e);
+			e.printStackTrace();
 		}
 		return res;
 	}

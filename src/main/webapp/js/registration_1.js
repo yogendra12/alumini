@@ -1,18 +1,7 @@
 $(document).ready(function () {
-	document.getElementById("reg_pass").oninvalid = validatePassword(document.getElementById("reg_pass"));
-	
-	/*$('#reg_pass').on('blur',function(){
-		var pF = document.getElementById("reg_pass");
-		validatePassword(pF);
-	});*/
 
-	var i=1;
-	  
-		/*if(typeof data.password != 'undefined'){
-			 $('#password').focus().select();
-			 showError(".pw_span" ,data.password,"pw_span red");
-			 err = true;
-		}*/
+
+	  var i=1;
      $("#add_row").click(function(){
 		  $('#addr'+i).html("<td><p class='checkboxpadding'><input  name='select"+i+"' type='checkbox' value='select' placeholder='select'  class='form-control input-md checkboxfieldwidth'></p></td><td><img src='../images/bird1.png' name='image' class='imageSpace photofieldwidth'/></td><td><p class='columnpadding'><input  name='name"+i+"' type='text' placeholder='Name'  class='form-control input-md'></p></td><td><p class='columnpadding'><input  name='about"+i+"' type='text' placeholder='About'  class='form-control input-md'></p></td><td><p class='columnpadding'><input  name='photo"+i+"' type='file' placeholder='photo'  class='form-control input-md'></p></td> ");
 
@@ -180,92 +169,43 @@ var fileInput1 = document.getElementById('action_json');
                 $(fieldID).remove();
             });
     });
-});
-
-
-
-$(document).on('click', '#form1_save', function(){
-	registration();
-});
-$(document).on('click', '#form2_save', function(){
-	updateSpouseDetails();
-});
-
-
-function updateSpouseDetails(){
-	var spouseName=$('#spouse_Name').val();
-	var spouseAbout=$('#spouse_desc').val();
-	
-	var childDetilsName=$('#child_name').val();
-	var childDetilsAbout=$('#child_about').val();
-	
-	var formData = new FormData();
-	formData.append('file', $('input[type=file]')[0].files[0]);
-	formData.append('file', $('input[type=file]')[1].files[0]);
-	formData.append("spouseName", spouseName);
-	formData.append("aboutSouse", aboutAbout);
-	formData.append("childName", childDetilsName);
-	formData.append("aboutChild", childDetilsAbout);
-	
-	jQuery.fn.makeMultipartRequest('POST', "updateSpouseDetails", false, formData, false, 'json', function(data){
-		console.log(data);
-	});
-}
-
-function registration(){
-	var name =$('#reg_name').val();
-	var rollNo = $('#reg_rollno').val();
-	var password = $('#reg_pass').val();
-	var email = $('#reg_email').val();
-	var no = $('#reg_contactno').val();
-	var dob = $('#reg_dob').val();
-	var cityTown = $('#reg_city').val();
-	var country = $('input[name="country"]:checked').val();
-	var oldPhoto = $('#reg_old').val();
-	var newPhoto = $('#reg_new').val();
-	var aboutUser = $('#reg_desc').val();
-	
-	
-	var formData = new FormData();
-	
-	formData.append('file', $('input[type=file]')[0].files[0]);
-	formData.append('file', $('input[type=file]')[1].files[0]);
     
-	formData.append('name', name);
-	formData.append('rollNo', rollNo);
-	formData.append('password', password);
-	formData.append('email', email);
-	formData.append('contactNo', no);
-	formData.append('dateOfBirth', dob);
-	formData.append('city', cityTown);
-	formData.append('country', country);
-	formData.append('aboutYou', aboutUser);
-	formData.append('country', country);
-	
-	jQuery.fn.makeMultipartRequest('POST', "registerUser", false, formData, false, 'json', function(data){
-		console.log(data);
-	});
+});
+function eventsRegistration() {
+	var eventName = $('#reg_rollno').val();
+	var eventDate = $('#reg_pass').val();
+	var eventDesc = $('#reg_name').val();
+	var eventDesc = $('#reg_email').val();
+	var eventDesc = $('#reg_contactno').val();
+	var eventDesc = $('#reg_name').val();
+	var eventDesc = $('#reg_name').val();
+	var eventDesc = $('#reg_name').val();
+	var eventDesc = $('#reg_name').val();
+	var eventDesc = $('#reg_name').val();
+
+	/*
+	 * var json ={}; json["eventName"] = eventName; json["eventDate"] =
+	 * eventDate; json["eventPhotosPath"] = eventPhoto; json["eventDescription"] =
+	 * eventDesc;
+	 */
+	var formData = new FormData();
+
+	formData.append('file', $('input[type=file]')[0].files[0]);
+	// formData.append('file', $('input[type=file]')[1].files[0]);
+	formData.append('eventName', eventName);
+	formData.append('eventDate', eventDate);
+	formData.append('eventDescription', eventDesc);
+
+	/*
+	 * jQuery.fn.makeRequest("POST","eventRegisterUser",json,function(response){
+	 * alert(response); });
+	 */
+	jQuery.fn.makeMultipartRequest('POST', "eventRegisterUser", false,
+			formData, false, 'json', function(data) {
+				console.log(data);
+			});
 	return false;
 }
-
-function validatePassword(input){
-	
-	var value = input.value;
-	var reg = /[:\s\\]/;
-     if(value == "" || value.length < 6 || value.length > 20){
-		input.setCustomValidity("Be Tricky! Should be between 6 - 20 characters");
-	}
-	else if(reg.test(value)){
-		input.setCustomValidity('Can contain A-Z, a-z, 0-9 and ~`!@#$%^&*()-_+={}|[];\'"<>,.?/');
-    }else{
-    	input.setCustomValidity('');
-    }
-    
-}
-
-
-
-
 
  
    

@@ -6,37 +6,12 @@
 		</div>
    <div class="panel-body">
 		<div class="panel panel-sky">
-		<!--	<div class="panel-heading panelHead-sky" data-toggle="collapse" data-target="#user_1">
-					<div class="col-md-1" style="font-size:18px;font-weight:bold;">
-						Year						
-					</div>
-					<div class="col-md-1" style="font-size:18px;font-weight:bold;padding-left:30px">
-						Subject						
-					</div>					
-					<div class="col-md-2 " style="font-size:18px;font-weight:bold;margin-top: -19px;padding-left:65px">
-						Faculty
-					</div>
-					<div class="col-md-1 " style="font-size:18px;font-weight:bold;">
-						Contact
-					</div>
-					<div class="col-md-2 " style="font-size:18px;font-weight:bold;    margin-top: -19px;padding-left:72px">
-						Enail
-					</div>
-					<div class="col-md-2 " style="font-size:18px;font-weight:bold;    margin-top: -19px;padding-left:50px">
-						Photo
-					</div>
-					<div class="col-md-3 " style="font-size:18px;font-weight:bold;padding-left:50px">
-						About
-					</div>
-					
-				</div>  -->
 				
 				
 <div class="table-responsive">
-  <table class="table">
+  <table class="table" id="myTable">
     <thead class="tablehead" style="border: 1px solid orange;">
       <tr>
-        <th class="year">Select</th>
         <th class="year">Year</th>
         <th class="subject">Subject</th>
         <th class="faculty">Faculty</th>
@@ -45,29 +20,115 @@
         <th class="photo">Photo</th>
 		<th class="about">About</th>
     </tr></thead>
-    <tbody>
-      <tr>
-      <td><input type="checkbox" name="number" value="select"></td>      
-        <td>1st year</td>
-        <td>Mathematics-1</td>
-        <td><input id="faculty_name" name="faculty_name" type="text" placeholder="Name" class="form-control input-md"></td>
-        <td><input id="faculty_contact" name="faculty_contact" type="text" placeholder="Contact" class="form-control input-md"></td>
-        <td><input id="faculty_email" name="faculty_email" type="text" placeholder="Email" class="form-control input-md"></td>
-        <td>
-        	<img src="../images/bird.jpg" name="image" class="imageSpace">
-        	<input type="file" class="input-file">
-        </td>
-		<td><textarea id="faculty_about" name="faculty_about" type="textarea" rows="2" cols="30" placeholder="About Faculty" class="form-control input-md"></textarea></td>
-      </tr>
+    <tbody id="itemContainer" >
+    
     </tbody>
   </table>
   </div>
 		
    </div>
 	<div class="col-sm-12" id="nextbutton">
-        <button class="btn btn-primary nextBtn btn-md pull-right marLeft7" type="button">Next</button>
-        <button class="btn btn-primary btn-md pull-right" type="button">Save</button>    
+        <!-- <button class="btn btn-primary nextBtn btn-md pull-right marLeft7" type="button">Next</button> -->
+        <!-- <button class="btn btn-primary btn-md pull-right" type="button" onclick="saveFaculty()">Save</button>   -->  
     </div>
    </div>
    </div>
    </div>
+   <script src="js/ajax.js"></script>
+   <script type="text/javascript">
+   $(document).ready(function(){
+var listOrders1 =${facultyOrders};
+display(listOrders1);
+   });
+
+function display(listOrders1){
+	if (listOrders1 != null){
+		$("#itemContainer tr").remove();
+		$("#itemContainer tr td").remove();
+		$.each(listOrders1, function(i, orderObj) {
+			var displayImage='';
+			 if(orderObj.facultyName == null){
+				 orderObj.facultyName = "";
+			 }
+			 if(orderObj.contact == null){
+				 orderObj.contact = "";
+			 }
+			 if(orderObj.email == null){
+				 orderObj.email = "";
+			 }
+			 if(orderObj.aboutFaculty == null){
+				 orderObj.aboutFaculty = "";
+			 }
+			 if(orderObj.facultyPhotoPath != null){
+				 displayImage ="<img src='"+orderObj.facultyPhotoPath+"' name='image' class='imageSpace'>"; 
+			 }
+			 
+			var tblRow ="<tr>"
+				/* +"<td><input  type='checkbox' class='check_class'  value='"+orderObj.facultyId+"' ></td>" */
+		       +" <td>"+orderObj.year+"</td>"
+		       +" <td>"+orderObj.subject+"</td>"
+		       +"<td><input id='"+orderObj.facultyId+"fname' value='"+orderObj.facultyName+"' name='faculty_name' type='text' placeholder='Name' class='form-control input-md'></td>"
+		        +"<td><input id='"+orderObj.facultyId+"contact' value='"+orderObj.contact+"' name='faculty_contact' type='text' placeholder='Contact' class='form-control input-md'></td>"
+		        +"<td><input id='"+orderObj.facultyId+"email' value='"+orderObj.email+"' name='faculty_email' type='text' placeholder='Email' class='form-control input-md'></td>"
+		        +"<td>"
+		        +displayImage
+		        	+"<input id='"+orderObj.facultyId+"fimage' type='file' class='input-file'>"
+		        +"</td>"
+				+"<td><textarea id='"+orderObj.facultyId+"aboutFaculty' placeholder='About Faculty'  name='faculty_about' type='textarea' rows='2' cols='30' class='form-control input-md' >"+orderObj.aboutFaculty+"</textarea></td>"
+				+"<td><input id="+orderObj.facultyId+" type='button' class='check_class'  value='Save' onclick ='saveFaculty(this.id)'  ></td>"
+		      +"</tr>";	      
+		      tblRow=  tblRow.replace(/\"/g, "");
+					$("#itemContainer").append(tblRow);
+		});
+					}
+	
+}
+
+/* $(".check_class").click(function() {
+	  $(".check_class").attr("checked", false); //uncheck all checkboxes
+	  $(this).attr("checked", true);  //check the clicked one
+	}); */
+	
+	
+	
+	
+
+function saveFaculty(id){
+	//var id = $('input:checkbox:checked').val();
+	var fname=$("#"+id+"fname").val();
+	var contact=$("#"+id+"contact").val();
+	var email=$("#"+id+"email").val();
+	var aboutFaculty=$("#"+id+"aboutFaculty").val();
+	var fimage = $("#"+id+"fimage")[0].files[0];
+	var formData = new FormData();
+    
+    formData.append('file', fimage);
+    formData.append('id',id);
+    formData.append('fname',fname);
+    formData.append('contact',contact);
+    formData.append('email',email);
+    formData.append('aboutFaculty',aboutFaculty);
+    jQuery.fn.makeMultipartRequest('POST', "facultyUpdate", false, formData, false, 'json', function(data){
+        console.log(data);
+        display(data); 
+});
+	/* $.ajax({
+		type : "POST",
+		url : "facultyUpdate",
+		data : {
+			formData:formData,
+		},
+				success : function(responce) {
+					if(responce != null){
+						
+					//	display(responce); 
+						//alert(responce);
+					}
+					
+				}
+	}); */
+
+}
+	 
+</script>
+   
