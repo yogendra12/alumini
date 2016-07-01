@@ -1,0 +1,322 @@
+/* Large desktops and laptops */
+@media (min-width: 1200px){
+body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+
+#header {
+    width: 80%;
+    height: 20%;
+    margin: auto;
+    background-color: white;
+	border-radius: 0 !important;
+    border: none;
+}
+
+.zero-padding {
+    padding: 0 !important;
+}
+
+#logoid{
+	
+padding-top: 8px;
+padding-left: 20px;
+
+}
+
+
+#textdiv{
+margin-top: 15px;
+}
+#textid {
+	font-size: 60px;
+	font-family: initial;
+    color: #911b18;  
+}
+
+#clickHerebtn {
+    margin-right: 2px;
+    float: right;
+}
+
+#loginformid {
+	display:none;
+	background-color: lightgray;
+     height: 91px;
+    float: right;
+    width: 50%;
+    margin-top: -13px;
+    margin-right: 4px;
+    position: relative;
+	padding-left: 14px;
+    padding-right: 0;
+}
+#forgotpwdid{
+	display:none;
+	background-color: lightgray;
+    height: 91px;
+    float: right;
+    width: 50%;
+    margin-top: -13px;
+    margin-right: 4px;
+    position: relative;
+	padding-left: 14px;
+    padding-right: 0;
+	
+	
+	
+}
+#loginFormClosebuttondiv{
+	
+	padding-top: 3px;
+}
+
+#passwordforgotid{
+	
+	font-size:16px;
+}
+
+/*login header close */
+
+#subnavbar {
+    width: 80%;
+    margin: auto;
+    background-color: #4F4E57;
+    border: none;
+    min-height: 30px;
+}
+#subnavbar ul {
+    padding: 0px;
+	padding-left: 5px;
+}
+#subnavbar ul li a {
+    color: #FFF;
+    padding-right: 60px;
+    font-size: 18px;
+    padding-bottom: 4px;
+    padding-top: 5px;
+}  
+
+/*login home header close */
+
+}
+
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+
+
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+	
+	
+}
+
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 481px) and (max-width: 767px) {
+	
+}
+
+/* Portrait phones and smaller */
+@media (min-device-width: 320px) and (max-device-width: 767px) {
+	
+	body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;	
+	font-family:helmet;
+}
+
+#header {
+    width: 100%;
+    height: 22.5%;
+    margin: auto;
+    background-color: white;
+	border-radius: 0 !important;
+    border: none;
+}
+
+.zero-padding {
+    padding: 0 !important;
+}
+
+#textdiv{
+margin-top: 15px;
+}
+#textid {
+	font-size: 16px;
+	font-family: initial;
+    color: #911b18;  
+}
+#logoid{
+	
+padding-top: 8px;
+padding-left: 5px;
+width:23%;
+
+}
+#clickHerebtn {
+    margin-right: 30px;
+    float: right;
+	font-size:12px;
+}
+
+#loginformid {
+	display:none;
+	background-color: lightgray;
+     height: 93px;
+    float: right;
+    width: 75%;
+    margin-top: -12px;
+    margin-right: 16px;
+    position: relative;
+	padding-left: 19px;
+    padding-right: 33px;
+}
+#forgotpwdid{
+	display:none;
+	background-color: lightgray;
+     height: 93px;
+    float: right;
+    width: 75%;
+    margin-top: -12px;
+    margin-right: 16px;
+    position: relative;
+	padding-left: 19px;
+    padding-right: 33px;
+	
+	
+	
+}
+#loginFormClosebuttondiv{
+	
+	margin-left: -18px;
+	padding-top: 3px;
+}
+
+#logindivid{
+	    margin-left: 15px;
+    margin-top: -3px;
+	width:90%;
+}
+#password-glyphiconwidth{
+	
+	padding:3px;
+}
+#username-glyphiconwidth{
+	
+	padding:3px;
+}
+
+#username{
+	
+	width:90%;
+	
+}
+
+#password{
+	
+	width:94%;
+}
+
+#passwordforgotid{
+	
+	width:90%;
+	font-size:12px;
+}
+#loginbuttonid{
+	
+	float:right;
+}
+#loginBtn{
+	
+	margin-top: -28px;
+    float: right;
+    margin-right: -22px;
+    padding: 2px 3px;
+    font-size: 14px;
+}
+#forgotpwdformCloseBtndiv{
+	
+	padding-top: 3px;
+	margin-left: -18px;
+}
+#forgot-div{
+	    margin-left: 18px;
+    margin-top: 3px;	
+}
+#submit-div{
+	
+	    margin-right: 0px;
+    margin-left: -30px;
+    margin-top: 14px;
+    margin-bottom: 0px;
+}
+
+#submitBtn{
+	
+	padding:3px;
+}
+#forgotpwddiv{
+	
+	width:50%;
+}
+/*login header close */
+#subnavbar {
+    width: 100%;
+    margin: auto;
+    background-color: #4F4E57;
+    border: none;
+    min-height: 30px;
+}
+#subnavbar ul {
+	
+	padding-left:5px;
+    padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+
+#subnavbar ul li a {
+        color: #FFF;
+		
+    padding-right: 0px;
+    font-size: 12px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.navbar-collapse.collapse {
+display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+margin-right: -15px !important;
+}
+
+.navbar-right {
+float: right!important;
+}
+
+ 
+	
+	
+}

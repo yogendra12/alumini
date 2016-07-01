@@ -1,0 +1,46 @@
+/* Panels Start*/
+.panel-sky{
+	border: 1px solid #d9edf7;
+	border-color: orange;
+}
+.panelHead-sky{
+	background-color:#d9edf7;
+	border: 1px solid #d9edf7;
+	min-height:75px;
+	cursor:pointer;
+}
+.panel-voilet{
+	border: 1px solid #b733ad;
+}
+.panelHead-voilet{
+	background-color:#b733ad;
+	color:#fff;
+}
+.panel-orange{
+	border: 1px solid #ff6600;
+}
+.panelHead-orange{
+	background-color:#ff6600;
+	color:#fff;
+}
+.panel-green{
+	border: 1px solid #33cc33;
+}
+.panelHead-green{
+	background-color:#33cc33;
+	color:#fff;
+}
+.panel-darkBlue{
+	border: 1px solid #25258e;
+}
+.panelHead-darkBlue{
+	background-color:#25258e;
+	color:#fff;
+}
+
+.panel-group .panel {
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+/* Panels End*/

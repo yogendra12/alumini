@@ -1,0 +1,427 @@
+/*
+@media queries 
+//large desktops and laptops
+ 
+@media (min-width:1200px){
+}
+//landscape tablets  and medium desktops 
+@media  (min-992px) and  (max-width:1199px){
+	
+}
+
+//protriat tablets and small desktops 
+@media (min-width:768px) and  (max-width:991px){
+	
+}
+
+
+//landscape phones and protriat tablets 
+@media (min-width:481px ) and (max-width:767px){
+	
+}
+
+protrait phones and small 
+@media (max-width:480px;){
+	
+}
+*/
+
+@media (min-width: 1200px){	
+
+body,html{
+    height:100%;
+}
+
+  
+
+
+body{
+    background-color:#004D85;
+	/*font-family:Arial, Helvetica, sans-serif;*/
+	font-family:helmet;
+}
+ 
+
+
+.marTop10{
+	/*margin-top:10px;*/
+	width:82%;
+  margin:auto;
+  padding-top:10px;
+}
+.marLeft7{
+	margin-left: 7px;
+}
+.marginTop15{
+	margin-top:15px;
+}
+.panel{
+	
+	margin-bottom:5px !important;
+	
+	
+}
+/*
+Spouse Details 
+
+*/
+.spousemargin{
+	padding-top:0px;
+	padding-left:0px;
+	padding-right:0px;
+}
+/*
+Child details 
+*/
+.childmargin{
+	padding-top:10px;
+	padding-left:0px;
+	padding-right:0px;
+}
+.minHeight50{
+	min-height:50px;
+}
+
+.imageSpace{
+	height: 65px;
+	width : 65px;
+	border: 1px solid dodgerblue;
+	border-radius:10px;
+	margin-right : 5px;
+	/*margin-top:-26px;*/
+	padding:0px;
+}
+#your-images{
+	
+	font-size:26px;
+}
+
+.userDetailSpace,.spouseDetailSpace,.childrenDetailSpace{
+	margin:0px;
+	padding:0px;
+}
+
+.familygallerySpace{
+	
+	margin:0px;
+	padding:30px;
+}
+#myCarousel{
+	
+	width:30%;
+}
+
+.carouselSpace{
+	
+}
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  
+ 
+
+#row{
+	
+	padding:opx;
+}
+ #eventimage1 .pull-right{
+    position:relative;
+    top:10px;
+    right:0px; 
+} 
+
+
+
+
+.container span.events-list-date{
+	
+	color:#999;
+	margin:0px;
+	padding:0px;
+	
+}
+.container h4  a{
+	color:#004A81;
+	
+}
+.container p{
+	
+	font-size:14px;
+	margin:0px;
+	padding:0px;
+}
+ 
+
+
+#registrationbody{
+	
+	background-color:#fff;
+	width:80%;
+	margin:auto;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:7px;
+	padding-right:20px;
+	
+}
+
+#submitbutton{
+	
+	width:8%;
+	font-size:12px;
+	background-color:#004D85;
+	margin-right:-16px;
+	
+}
+#nextbutton1{
+	
+	width:25%;
+	font-size:12px;
+	background-color:#004D85;
+	margin-right:-10px;
+}
+
+ 
+  
+ #your-details-div{
+	 
+	 width:70%;
+	 
+	 
+ } 
+ .photofieldwidth{
+	 
+	 width:120px;
+ }
+ .photouploadfieldwidth{
+	 
+	 width:300px;
+ }
+ .privacy-field-width{
+	 width:20px;
+	
+ }
+ .sno-field-width{
+	 width:15px;
+	
+ }
+ .checkboxfieldwidth{
+	 width:13px;
+ }
+ 
+ #nextbutton{
+	 
+	 padding-top:15px;
+	 
+ }
+ 
+ #spouseid{
+	 
+	 padding-left:0px;
+ }
+ 
+#yourdetails{
+	 
+	 font-size:26px;
+	 padding-left:15px;
+	 padding-bottom:10px;
+ }
+ .carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+
+.aboutfieldwidth{
+	width:400px;
+	
+}
+/*
+children table padding*/
+p.columnpadding{
+	padding-top:13px;
+	
+}
+p.privacypadding{
+	
+	padding-top:10px;
+}
+p.snopadding{
+	
+	padding-top:22px;
+}
+p.checkboxpadding{
+	padding-top:18px;
+}
+.spouseImage{
+	width:100%;
+	height:100%;
+	border: 1px solid dodgerblue;
+	border-radius:15px;
+}
+
+}
+
+
+@media (min-device-width: 320px) and (max-device-width: 767px) {
+	
+	body,html{
+    height:100%;
+}
+
+  
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+
+#registrationbody{
+	
+	background-color:#fff;
+	width:100%;
+	margin:auto;
+	padding-top:20px;
+	padding-bottom:20px;
+	
+	
+}
+
+#yourdetails{
+	
+	font-size:12px;
+}
+
+ #your-images{
+	
+	font-size:12px;
+}
+
+.paddingzeroxs{
+	
+	padding:0px;
+	
+	
+}
+
+#your-details-div{
+	
+	width:65%;
+	padding:2px;
+}
+
+#your-images-width{
+	
+	width:35%;
+	padding:0px;
+}
+
+#new-images{
+	
+	font-size:12px;
+}
+
+#nextbutton{
+	
+	margin-top:6px;
+}
+
+#savebutton{
+	
+	margin-right:5px;
+}
+
+.paddingleftzeroxs{
+	
+	padding-left:0px;
+}
+
+.spouseImage{
+	
+	width:100%;
+}
+
+/*.photofieldwidthxs{
+	
+	width:100%;
+}*/
+
+.form-control{
+	
+	 width: 100%;
+    height: 20px;
+    padding-top: 23px;
+    padding: 3px 0px;
+    font-size: 7px;
+}
+
+
+
+.photofieldwidth{
+	
+	font-size:10px;
+	width:100%;
+}
+
+.namewidth{
+	
+	font-size:10px;
+}
+
+.aboutfieldwidth{
+	
+	font-size:10px;
+}
+
+.uploadphotofieldwidth{
+	
+	font-size:10px;
+}
+
+.checkboxfieldwidth{
+	 font-size:9px;
+ }
+
+.checkboxpadding{
+	
+	
+	width:14px;
+	
+	
+}
+
+#uploadphotofont-xs{
+	
+	font-size:9px;
+}
+
+#paddingright-xs{
+	
+	padding-right:10px;
+}
+
+
+
+.photouploadfieldwidth{
+	
+	
+	width: 45px;
+    font-size: 5px;
+}	
+
+#description{
+	
+	font-size:9px;
+}
+
+.privacy-field-width{
+	
+	font-size:9px;
+}
+	
+	
+	
+	
+}
+

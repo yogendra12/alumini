@@ -1,0 +1,171 @@
+@media (min-width: 1200px){
+	
+	body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+	
+}
+
+.form-control {
+    padding-right: 30px;
+}
+
+.form-control + .glyphicon {
+    position: absolute;
+    right: 0;
+    padding: 8px 27px;
+}
+
+   
+  /*events*/
+  
+  #events{
+	  width:80%;
+	  margin:auto;
+	  border:1px solid black; 
+	  background-color:#fff;  
+	  border-radius: 0px;
+	  padding-top: 10px;
+  }
+  
+  #eventimage1{
+    width:100%;
+    height:50%;
+    margin:auto;    
+    border:none;
+	padding:15px;
+	background-color:#fff;
+	
+}
+
+.eventlistdiv{
+	    width: 106%;
+    padding-bottom: 5px;
+    margin-left: -30px;
+    /* margin-right: 3px; */
+    margin-bottom: 10px;
+    border-bottom: 1px solid;
+	    padding-left: 10px;
+    padding-right: 10px;
+	
+}
+
+#row{
+	
+	padding:opx;
+}
+ #eventimage1 .pull-right{
+    position:relative;
+    top:10px;
+    right:0px; 
+} 
+
+
+#eventshead{
+	
+	background-color:#fff;
+	
+}
+
+#eventslist{
+	
+	padding:10px;
+	
+	/*border-left:1px solid;
+	border-bottom:1px solid;
+	border-top:1px solid;
+	border-right:1px solid;
+	
+  border-color:black;*/
+	
+}
+
+
+
+.container span.events-list-date{
+	
+	color:#999;
+	margin:0px;
+	padding:0px;
+	
+}
+.container h4  a{
+	color:#004A81;
+	
+}
+.container p{
+	
+	font-size:14px;
+	margin:0px;
+	padding:0px;
+	width:100%;
+}
+ .marTop10{
+	/*margin-top:10px;*/
+	width:82%;
+  margin:auto;
+  padding-top:10px;
+}
+.panel{
+	
+	margin-bottom:10px !important;
+	
+	
+}
+.minHeight50{
+	min-height:50px;
+}
+.panel-sky{
+	border: 0.5px solid #d9edf7;
+	border-color:orange;
+}
+.panelHead-sky{
+	background-color:#d9edf7;
+	border: 1px #004D85;
+	min-height:75px;
+	cursor:pointer;
+}
+.imageSpace{
+	height: 65px;
+	width : 65px;
+	border: 1px solid dodgerblue;
+	border-radius:10px;
+	margin-right : 5px;
+	margin-top:-5px;
+	padding:0px;
+}
+
+}
+
+@media (min-device-width: 320px) and (max-device-width: 767px) {
+	body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+	
+}
+
+.zeropaddingxs{
+	
+	padding:0px;
+}
+
+#padding-top-xs{
+	
+	padding-top:10px;
+}
+
+}
+  
+  
+ 
+  

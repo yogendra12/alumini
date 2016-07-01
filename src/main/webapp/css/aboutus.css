@@ -1,0 +1,68 @@
+@media (min-width: 1200px){
+
+body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+
+
+.zero-padding {
+    padding: 0 !important;
+}
+
+
+.form-control {
+    padding-right: 30px;
+}
+
+.form-control + .glyphicon {
+    position: absolute;
+    right: 0;
+    padding: 8px 27px;
+}
+
+.marTop10{
+	/*margin-top:10px;*/
+	width:82%;
+  margin:auto;
+  padding-top:10px;
+}
+.panel{
+	
+	margin-bottom:10px !important;
+	
+	
+}
+.minHeight50{
+	min-height:50px;
+}
+.panel-sky{
+	border: 0.5px solid #d9edf7;
+	border-color:orange;
+}
+.panelHead-sky{
+	background-color:#d9edf7;
+	border: 1px #004D85;
+	min-height:75px;
+	cursor:pointer;
+}
+
+}
+
+@media (min-device-width: 320px) and (max-device-width: 767px) {
+	
+	.zeropaddingxs{
+		
+		padding:0px;
+	}
+
+#paddingtop-xs{
+		
+		padding-top:10px;
+}
+}

@@ -1,0 +1,412 @@
+@media (min-width: 1200px){
+body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+/*header content starts */
+
+
+
+
+/*header content ends */
+/*body content starts */
+.zero-padding {
+    padding: 0 !important;
+}
+
+#carosel{
+    width:80%;
+    margin:auto;
+	padding: 0px;
+}
+
+
+
+.form-control {
+    padding-right: 30px;
+}
+
+.form-control + .glyphicon {
+    position: absolute;
+    right: 0;
+    padding: 8px 27px;
+}
+
+
+
+/* grid module div */
+
+.marTop10{
+	/*margin-top:10px;*/
+	width:82%;
+  margin:auto;
+  padding-top:10px;
+}
+.panel{
+	
+	margin-bottom:10px !important;
+	
+	
+}
+.minHeight50{
+	min-height:50px;
+}
+.panel-sky{
+	border: 0.5px solid #d9edf7;
+	border-color:orange;
+	
+}
+
+.panel-group .panel {
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+#marginbtm{
+    margin-bottom:20px;
+}
+.panelHead-sky{
+	background-color:#d9edf7;
+	border: 1px #004D85;
+	min-height:75px;
+	cursor:pointer;
+}
+
+.rollno{
+	
+	font-size:16px;
+	font-weight:bold;
+	padding-top:2px;
+	padding-left:20px;
+}
+.homeimages-heading{
+	
+	font-size:18px;
+	font-weight:bold;
+	padding-left:45px
+}
+.name{
+	
+	font-size:18px;
+	font-weight:bold;
+	padding-left:60px;
+}
+.contact{
+	font-size:18px;
+	font-weight:bold;
+	padding-left:70px;
+}
+.email{
+	font-size:18px;
+	font-weight:bold;
+	padding-left:80px;
+}
+.livesin{
+	
+	font-size:18px;
+	font-weight:bold;
+	padding-left:98px;
+}
+
+.userrollno{
+	
+	padding-top:15px;
+}
+
+#username-grid{	
+	padding-top:15px;
+	width:22%	
+}
+
+.usercontact{
+	
+	padding-top:15px;
+	padding-left:15px;
+	
+}
+.useremail{
+	
+	padding-top:15px;
+	padding-left: 50px;
+}
+.userlivs{
+	
+	padding-top:15px;
+	padding-left: 170px;
+}
+
+.imageSpace{
+	height: 65px;
+	width : 65px;
+	border: 1px solid dodgerblue;
+	border-radius:10px;
+	margin-right : 5px;
+	margin-top:-5px;
+	padding:0px;
+}
+.userDetailSpace,.spouseDetailSpace,.childrenDetailSpace{
+	margin:0px;
+	padding:0px;
+}
+
+.familygallerySpace{
+	
+	margin:0px;
+	padding:12px;
+
+}
+#familyid{
+	
+	
+}
+#myCarousel{
+	
+	width:100%;
+}
+
+.carouselSpace{
+	
+}
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  
+  /*events*/
+  
+ 
+
+#row{
+	
+	padding:opx;
+}
+
+
+
+
+
+.container span.events-list-date{
+	
+	color:#999;
+	margin:0px;
+	padding:0px;
+	
+}
+.container h4  a{
+	color:#004A81;
+	
+}
+.container p{
+	
+	font-size:14px;
+	margin:0px;
+	padding:0px;
+}
+
+#userone{
+	
+	padding-top:20px;
+}
+
+.col-md-3{
+	
+	width:19%;
+	
+}
+
+.usernamegrid{
+	
+	width:20%;
+	padding-top:15px;
+}
+
+.carousel-control.left, .carousel-control.right {
+	background-image:none;
+}
+ 
+ .font-style-heading1{
+	 
+	 font-size:20px;
+	 color:#004A81;
+	 text-align:center;
+	 font-weight: bold;
+ }
+ .font-style-heading2{
+	 
+	 color:#FF9900;
+	 font-size:18px;
+	 text-align:center;
+	 margin-top:-10px;
+	 font-weight: bold;
+ }
+ .font-style-heading3{
+	 
+	 color:#4f4e57;
+	 text-align:center;
+	 margin-top:-4px;
+	 font-weight: bold;
+ }
+ .font-style-heading4{
+	 
+font-size:20px;
+	 color:#004A81;
+	 text-align:center;
+	  margin-top:-9px;
+	  font-weight: bold;
+ }
+ 
+ 
+#userdetails-id{
+	
+	min-height:190px;
+	padding-left:16px;
+	
+}
+#userdescription{
+	
+	padding-top:25px;
+}
+
+/*footer css */
+
+
+/*footer css */
+
+}
+
+
+@media (min-device-width: 320px) and (max-device-width: 767px) {
+
+body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+
+
+.zero-padding {
+    padding: 0 !important;
+}
+
+#carosel{
+    width:100%;
+    margin:auto;
+	padding: 0px;
+}
+
+.gridimage{
+	
+	width: 49%;
+    padding: 4px;
+}
+#grid-imagesxs{
+	
+	padding-left:0px;
+}
+#grid-rollnoxs{
+	
+	padding-left:0px;
+	
+}
+
+#grid-namexs{
+	padding-left:0px;
+}
+
+#grid-contactxs{
+	padding-left:0px;
+}
+#grid-emailxs{
+	padding-left:0px;
+}
+
+#grid-livesinxs{
+	padding-left:0px;
+}
+
+
+
+
+#userdescription{
+	
+	padding:0px;
+}
+
+#userdetails-panelxs{
+	
+	padding:0px;
+}
+
+#spousedetails-xs{
+	
+	padding-top:5px;
+	padding-right:0px;
+	padding-left:0px;
+	padding-bottom:0px;
+}
+
+#spousepanelbody-xs{
+	
+	padding: 0px;
+    padding-top: 5px;
+}
+
+#spousedesc-xs{
+	
+	padding:0px;
+}
+
+#childdetails-xs{
+	
+	padding-top:5px;
+	padding-right:0px;
+	padding-left:0px;
+	padding-bottom:0px;
+	
+	
+}
+
+#childrenpanelbody-xs{
+	
+	padding: 0px;
+    padding-top: 5px;
+}
+	
+#childrendesc-xs{
+	
+	padding:0px;
+}
+
+#familydetails-xs{
+	
+	padding-top:5px;
+	padding-right:0px;
+	padding-left:0px;
+	padding-bottom:0px;
+}
+
+#familyid{
+	
+	
+    padding-top: 5px;
+	
+}
+
+.familygalleryxs{
+	
+	padding-bottom:15px;
+}
+
+
+	
+} 

@@ -1,0 +1,176 @@
+
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    color: #4f4e57;
+    text-decoration:none;
+    word-spacing: normal;
+   /* text-align:left;
+    letter-spacing: 0;
+    line-height: 1.6em;
+    font-size: 90%;
+    overflow-y:scroll;*/
+    background:#004D85;
+}
+
+div{
+    outline:0 none;
+    display:block;
+}
+
+#page_margins{
+    width:80%;
+    height:21%;
+    margin:auto;
+    background-color:white;
+}
+
+#page_margins #header{
+  position: relative;
+  padding:0;
+  color: #4f4e57;
+  background:#FFF;
+  margin: 0 10px;
+  height:130px;
+}
+
+
+#headerid #login{
+    position:absolute;
+    top:0px;
+    right:150px;
+    text-align:right;
+}
+
+#login .login-form{
+    float:right;
+    padding-top:11px;
+    padding-bottom:10px;
+    padding-right: 7px;
+    padding-left: 7px;
+    background: url('../images/bg.gif') no-repeat top right;
+}
+
+#login .username{
+    background: url('../images/username.gif') no-repeat;
+    width: 150px;
+    height: 25px;
+    float: left;
+    margin-left: 10px;
+}
+
+#login .password {
+	
+    background: url('../images/password.gif') no-repeat;
+    width: 125px;
+    height: 25px;
+    float: left;
+    margin-left: 3px;
+}
+
+#login .login-form input{
+  color:#666666;
+  font-size:75%;
+}
+
+#login .username input{
+    width: 120px;
+    padding:6px;
+    float:left;
+    background: none;
+    border-style: none;
+    margin-left:5px;
+}
+
+#login .password input{
+    width:90px;
+    padding:6px;
+    float:left;
+    background:none;
+    border-style: none;
+    margin-left:5px;
+}
+#login .lbutton input{
+  background-image: url('../images/lbutton.gif');
+  background-repeat:no-repeat;
+  background-position: top left;
+  background-color:transparent;
+  width:24px;
+  height:25px;
+  padding:0px;
+  margin: 0px;
+}
+
+#login input[type=submit]{
+  display:inline;
+}
+
+ /*#login .remeber{
+    clear:both;
+    float:left;
+    margin-left:0px;
+    margin-top:2px;
+    padding-top: 3px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-size:10px;
+    color: #999999;
+}*/
+
+#remember{
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+
+fieldset{
+  display:block;
+  -webkit-margin-start: 2px;
+  -webkit-margin-end: 2px;
+  -webkit-padding-before: 0.35em;
+  -webkit-padding-start: 0.75em;
+  -webkit-padding-end: 0.75em;
+  -webkit-padding-after: 0.625em;
+  border-width: 2px;
+  border-style: groove;
+  border-color: threedface;
+}
+
+fieldset, img{
+  border:0px solid;
+}
+
+#GenAuth{
+    background:transparent;
+    border:0px;
+	width:30px;
+   margin-left: 189px;
+    margin-bottom: 31px;
+    margin-top: -16px;
+}
+
+/*p{
+    line-height: 0.4em;
+    display:block;
+	color:red;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,177 @@
+@media (min-width: 1200px){
+body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+
+
+
+
+.marTop10{
+	/*margin-top:10px;*/
+	width:82%;
+  margin:auto;
+  padding-top:10px;
+}
+.panel{
+	
+	margin-bottom:10px !important;
+	
+	
+}
+.minHeight50{
+	min-height:50px;
+}
+.panel-sky{
+	border: 0.5px solid orange;
+	border-color:orange;
+}
+.panelHead-sky{
+	background-color:#d9edf7;
+	border: 1px #004D85;
+	min-height:75px;
+	cursor:pointer;
+}
+
+.imageSpace{
+	height: 65px;
+	width : 65px;
+	border: 1px solid dodgerblue;
+	border-radius:10px;
+	margin-right : 5px;
+	margin-top:-5px;
+	padding:0px;
+}
+
+
+.carousel-control.left, .carousel-control.right {
+	background-image:none;
+}
+ 
+ .font-style-heading1{
+	 
+	 font-size:20px;
+	 color:#004A81;
+	 text-align:center;
+	 font-weight: bold;
+ }
+ .font-style-heading2{
+	 
+	 color:#FF9900;
+	 font-size:18px;
+	 text-align:center;
+	 margin-top:-10px;
+	 font-weight: bold;
+ }
+ .font-style-heading3{
+	 
+	 color:#4f4e57;
+	 text-align:center;
+	 margin-top:-4px;
+	 font-weight: bold;
+ }
+ .font-style-heading4{
+	 
+font-size:20px;
+	 color:#004A81;
+	 text-align:center;
+	  margin-top:-9px;
+	  font-weight: bold;
+ }
+ 
+ 
+  
+
+.year{
+	
+	width:7%;
+	background-color:orange;
+	color:#fff;
+	font-size:18px;
+}
+.subject{
+	
+	width:10%;
+	background-color:orange;
+	color:#fff;
+	font-size:18px;
+}
+.faculty{
+	width:14%;
+	background-color:orange;
+	color:#fff;
+	font-size:18px;
+	
+}
+.contact{
+	width:11%;
+	background-color:orange;
+	color:#fff;
+	font-size:18px;
+	
+}
+.email{
+	width:20%;
+	background-color:orange;
+	color:#fff;
+	font-size:18px;
+	
+}
+.photo{
+	width:11%;
+	background-color:orange;
+	color:#fff;
+	font-size:18px;
+	
+}
+.about{
+	width:19%;
+	background-color:orange;
+	color:#fff;
+	font-size:18px;
+	
+	
+}
+
+}
+
+@media (min-device-width: 320px) and (max-device-width: 767px) {
+	
+	body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+	
+.imageSpace{
+	height: 65px;
+	width : 65px;
+	border: 1px solid dodgerblue;
+	border-radius:10px;
+	margin-right : 5px;
+	margin-top:-5px;
+	padding:0px;
+}
+
+.paddingzeroxs{
+	
+	padding:0px;
+}
+
+#margintop-xs{
+	
+	padding-top:10px;
+}
+	
+	
+}
+

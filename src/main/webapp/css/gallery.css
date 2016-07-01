@@ -1,0 +1,146 @@
+@media (min-width: 1200px){
+   
+body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+
+
+.zero-padding {
+    padding: 0 !important;
+}
+
+
+
+
+
+
+.marTop10{
+	
+	width:82%;
+  margin:auto;
+  padding-top:10px;
+}
+.panel{
+	
+	margin-bottom:10px !important;
+	
+	
+}
+.minHeight50{
+	min-height:50px;
+}
+.panel-sky{
+	border: 0.5px solid #d9edf7;
+	border-color:orange;
+}
+.panelHead-sky{
+	background-color:#d9edf7;
+	border: 1px #004D85;
+	min-height:75px;
+	cursor:pointer;
+}
+
+#imagevideo{
+	
+	padding:7px;
+}
+
+}
+
+@media (min-device-width: 320px) and (max-device-width: 767px) {
+	
+	body,html{
+    height:100%;
+}
+
+
+body{
+    background-color:#004D85;
+	font-family:helmet;
+}
+
+
+.zero-paddingxs {
+    padding:0px;
+}
+
+
+
+
+
+
+.marTop10{
+	
+	width:100%;
+  margin:auto;
+  padding-top:10px;
+}
+.panel{
+	
+	margin-bottom:10px !important;
+	
+	
+}
+.minHeight50{
+	min-height:50px;
+}
+.panel-sky{
+	border: 0.5px solid #d9edf7;
+	border-color:orange;
+}
+.panelHead-sky{
+	background-color:#d9edf7;
+	border: 1px #004D85;
+	min-height:75px;
+	cursor:pointer;
+}
+	
+#imagevideo{
+	
+	padding:0px;
+}
+
+#image-videobuttonsxs{
+	
+	margin-left:0px;
+	margin-right:0px;
+}	
+	
+	
+}
+
+  
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+	
+	
+
+
+ 
+ 
+
+  
+
+
+  
+ 
+  
