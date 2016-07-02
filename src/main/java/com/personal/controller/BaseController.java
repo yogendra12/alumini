@@ -1,11 +1,14 @@
 package com.personal.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 //import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
@@ -36,7 +39,7 @@ public class BaseController {
 	@Autowired
 	EventsDao eventDao;
 	Logger log = Logger.getLogger(BaseController.class);
-	
+
 	@RequestMapping(value = "/personal")
 	public String getPersonalPage(ModelMap model) {
 		System.out.println("this is the sample sample page...");
@@ -56,11 +59,12 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/eventHome")
-	public String getEventHomePage(ModelMap model, HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
+	public String getEventHomePage(ModelMap model, HttpServletRequest request)
+			throws JsonGenerationException, JsonMappingException, IOException {
 		List<Events> eventsList = eventDao.getAll();
 		ObjectMapper mapper = null;
 		String json = "";
-		if(eventsList != null && eventsList.size() > 0){
+		if (eventsList != null && eventsList.size() > 0) {
 			mapper = new ObjectMapper();
 			json = mapper.writeValueAsString(eventsList);
 			request.setAttribute("eventsList", json);
@@ -69,9 +73,30 @@ public class BaseController {
 		System.out.println("alumini page...");
 		return "event";
 	}
+
 	@RequestMapping(value = "/eventsregHome")
-	public String geteventsregHomePage(ModelMap model) {
+	public String geteventsregHomePage(ModelMap model, HttpServletRequest request) {
 		System.out.println("eventsreg........");
+		String eventId = request.getParameter("eventId");
+		ObjectMapper mapper = null;
+		String json = "";
+		try{
+		if (StringUtils.isNotBlank(eventId)) {
+			List<Events> eventsList = eventDao.getEvent(Integer.parseInt(eventId));
+			if (eventsList != null) {
+				System.out.println(eventsList.get(0).getEventDate());
+				mapper = new ObjectMapper();
+				json = mapper.writeValueAsString(eventsList);
+				request.setAttribute("eventsList1", json);
+				System.out.println(json);
+			}
+		}else{
+			request.setAttribute("eventsList1", "null");
+		}
+		}catch(Exception e){
+			
+		}
+
 		return "eventsreg";
 	}
 
@@ -86,27 +111,28 @@ public class BaseController {
 		System.out.println("alumini page...");
 		List<FacultyInfo> listFacultyInfo = null;
 		String responce = null;
-		try{
-			listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
+		try {
+			listFacultyInfo = facultyInfoDao.getFacultyInfoAll();
 			ObjectMapper mapper = new ObjectMapper();
 			responce = mapper.writeValueAsString(listFacultyInfo);
 			request.setAttribute("facultyDetails", responce);
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
-		
+
 		return "faculty";
 	}
+
 	@RequestMapping(value = "/facultyentry")
 	public String getFacultyEntry(ModelMap model, HttpServletRequest objRequest) {
 
 		List<FacultyInfo> listFacultyInfo = null;
-		String json  = "";
+		String json = "";
 		try {
-			listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
+			listFacultyInfo = facultyInfoDao.getFacultyInfoAll();
 			ObjectMapper mapper = new ObjectMapper();
 			json = mapper.writeValueAsString(listFacultyInfo);
-			 objRequest.setAttribute("facultyOrders", json);
+			objRequest.setAttribute("facultyOrders", json);
 		} catch (Exception e) {
 			log.error("Exception in getting rollnos", e);
 		}
@@ -120,13 +146,12 @@ public class BaseController {
 	}
 
 	@ModelAttribute("rollNos")
-	public @ResponseBody String getRollNos(
-			@ModelAttribute PersonalInfo personalInfo, ModelMap model,
+	public @ResponseBody String getRollNos(@ModelAttribute PersonalInfo personalInfo, ModelMap model,
 			HttpServletRequest request) {
 		Map<String, String> listRollNos = null;
-		String json  = "";
+		String json = "";
 		try {
-			listRollNos =personalInfoDao.getRollNos() ;
+			listRollNos = personalInfoDao.getRollNos();
 			ObjectMapper mapper = new ObjectMapper();
 			json = mapper.writeValueAsString(listRollNos);
 		} catch (Exception e) {
@@ -136,8 +161,7 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/importRollCSV")
-	public @ResponseBody String importCSVData(
-			@ModelAttribute PersonalInfo personalInfo, ModelMap model,
+	public @ResponseBody String importCSVData(@ModelAttribute PersonalInfo personalInfo, ModelMap model,
 			HttpServletRequest request) {
 		System.out.println("inside the controller");
 		String s = request.getParameter("jso");
@@ -154,8 +178,7 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/importFacCsv")
-	public @ResponseBody String importFacCsv(
-			@ModelAttribute FacultyInfo facultyInfo, ModelMap model,
+	public @ResponseBody String importFacCsv(@ModelAttribute FacultyInfo facultyInfo, ModelMap model,
 			HttpServletRequest request) {
 		String s = request.getParameter("jso");
 		System.out.println(s);

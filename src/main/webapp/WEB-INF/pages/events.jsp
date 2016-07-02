@@ -15,7 +15,7 @@
 		<div class="panel-body">
 			<div class="panel panel-voilet">
 				<div class="panel panel-body" id='panelBodyId' style="padding: 0px;">
-										<div class="col-md-12" style="padding: 5px;">
+										<!-- <div class="col-md-12" style="padding: 5px;"> -->
 						<div class="col-md-3">
 							<img class="img-responsive" src="images/three.jpg" />
 						</div>
@@ -95,18 +95,35 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	function pad(s, width, character) {
+	    return new Array(width - s.toString().length + 1).join(character) + s;
+	}
+	
 	var eventList ='${eventsList}';
 	var html = "";
 	if(eventList != ""){
 		var obj = JSON.parse(eventList);
 		$('#panelBodyId').html('');
 		$.each(obj, function(key,val){
+			var maxDate = new Date(val.eventDate);
+			var maxDateFormatted =
+			    maxDate.getFullYear() +
+			    '/' + pad(maxDate.getMonth() + 1, 2, '0') +
+			    '/' + pad(maxDate.getDate(), 2, '0');
 			 html = '<div class="col-md-12" style="padding: 5px;"><div class="col-md-3">'+
 			'<img class="img-responsive" src='+val.eventPhotosPath+'></div><div class="col-md-9">'+
-			'<span class="events-list-date">'+val.eventDate+'</span><h4>'+
-			'<a href="#" title="Insert event title here" id='+val.id+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4><p>'+val.eventDescription+'</p></div></div>';
+			'<span class="events-list-date">'+maxDateFormatted+'</span><h4>'+
+			'<a href="#" title="Insert event title here" id='+val.eventId+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4><p>'+val.eventDescription+'</p></div></div>'+
+			'<input type="button" id='+val.eventId+' value="update" onclick="openEventReg(this.id);">';
 			 $('#panelBodyId').append(html);	
 		});
 	}
 });
+function  openEventReg(id){
+	var res = null;
+	var href = $(location).attr("href");
+	var dummy = href.substr(href.lastIndexOf('/') +1);
+	res = href.replace(dummy, "eventsregHome?eventId="+id);
+	window.location.replace(res);
+}
 </script>
