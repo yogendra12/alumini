@@ -103,12 +103,12 @@
 		<li><a href="aluminiHome">Home</a></li>
 		<li><a href="galleryHome">Gallery</a></li>
 		<li><a href="eventHome">Events</a></li>
-		<li><a href="eventsregHome">Events Registration</a></li>
+		<li><a href="eventsregHome">Events Reg</a></li>
 		<c:if test="${not empty LoginBean}">
 			<li><a href="regHome">Registration</a></li>
 		</c:if>
 		<li><a href="facultyHome">Faculty</a></li>
-		<li><a href="facultyentry">Faculty</a></li>
+		<li><a href="facultyentry">Faculty Reg</a></li>
 		<li><a href="aboutHome">Aboutus</a></li>
 	</ul>
 

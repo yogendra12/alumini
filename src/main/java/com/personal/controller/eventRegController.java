@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -21,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.personal.dao.ChildInfoDao;
 import com.personal.dao.EventsDao;
 import com.personal.dao.PersonalInfoDao;
-import com.personal.model.ChildInfo;
 import com.personal.model.Events;
-import com.personal.model.PersonalInfo;
 import com.personal.util.AWSS3Util;
 import com.personal.util.AluminiCommonUtils;
 
@@ -99,7 +96,7 @@ public class eventRegController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+			e.printStackTrace();
 		}
 				return json.toString() ;
 		}

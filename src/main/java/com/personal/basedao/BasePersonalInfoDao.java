@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -121,18 +122,20 @@ public class BasePersonalInfoDao {
 		return map;
 	}
 
-	public List<PersonalInfo> getPersonalInfoAll() {
+	public List<PersonalInfo> getPersonalInfoAll(String params) {
 		List<PersonalInfo> retlist = null;
 		try {
-			String sql = "SELECT * from personal_info  ";
-			retlist = jdbcTemplate.query(sql,
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * from personal_info ");
+			if(StringUtils.isNotEmpty(params)){
+			sql.append(" where isVerified = 1");	
+			}
+			retlist = jdbcTemplate.query(sql.toString(),
 					ParameterizedBeanPropertyRowMapper
 							.newInstance(PersonalInfo.class));
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return retlist;
 	}
 }

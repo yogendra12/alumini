@@ -95,16 +95,16 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var eventList ='${eventsList}';
+	var eventList =${eventsList};
 	var html = "";
 	if(eventList != ""){
-		var obj = JSON.parse(eventList);
 		$('#panelBodyId').html('');
-		$.each(obj, function(key,val){
+		$.each(eventList, function(key,val){
 			 html = '<div class="col-md-12" style="padding: 5px;"><div class="col-md-3">'+
 			'<img class="img-responsive" src='+val.eventPhotosPath+'></div><div class="col-md-9">'+
 			'<span class="events-list-date">'+val.eventDate+'</span><h4>'+
-			'<a href="#" title="Insert event title here" id='+val.id+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4><p>'+val.eventDescription+'</p></div></div>';
+			'<a href="#" title="Insert event title here" id='+val.id+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4>'+
+			'<p>'+val.eventDescription+'</p></div></div>';
 			 $('#panelBodyId').append(html);	
 		});
 	}

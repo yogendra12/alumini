@@ -1,11 +1,13 @@
 package com.personal.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 //import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
@@ -44,8 +46,38 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/aluminiHome")
-	public String getaluminiHomePage(ModelMap model) {
+	public String getaluminiHomePage(ModelMap model,HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
 		System.out.println("alumini page...");
+		String json = "";
+		List<PersonalInfo> finalList = null;
+		List<PersonalInfo> listPersonalInfo =   personalInfoDao.getPersonalInfoAll("verified");
+		if(listPersonalInfo != null && listPersonalInfo.size() > 0){
+			finalList = new ArrayList<PersonalInfo>();
+			for(PersonalInfo localPersonalInfo : listPersonalInfo ){
+				if(StringUtils.isEmpty(localPersonalInfo.getDateOfBirth())){
+					localPersonalInfo.setDateOfBirth("");
+				}
+				if(StringUtils.isEmpty(localPersonalInfo.getOldPhotoPath())){
+					localPersonalInfo.setOldPhotoPath("images/KlceLogo6.png");
+				}
+				if(StringUtils.isEmpty(localPersonalInfo.getNewPhotoPath())){
+					localPersonalInfo.setNewPhotoPath("images/KlceLogo6.png");
+				}
+				if(StringUtils.isEmpty(localPersonalInfo.getSpousePhoto())){
+					localPersonalInfo.setSpousePhoto("images/KlceLogo6.png");
+				}
+				if(StringUtils.isEmpty(localPersonalInfo.getSpouseName())){
+					localPersonalInfo.setSpouseName("");
+				}
+				if(StringUtils.isEmpty(localPersonalInfo.getAboutSouse())){
+					localPersonalInfo.setAboutSouse("");
+				}
+				finalList.add(localPersonalInfo);
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		json = mapper.writeValueAsString(listPersonalInfo);
+		request.setAttribute("listPersonal", json);
 		return "alumini";
 	}
 
