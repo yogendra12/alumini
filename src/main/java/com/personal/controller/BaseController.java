@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.personal.basedao.BaseFamilyImagesDao;
 import com.personal.basemodel.FamilyImages;
 import com.personal.dao.ChildInfoDao;
 import com.personal.dao.EventsDao;
 import com.personal.dao.FacultyInfoDao;
+import com.personal.dao.FamilyImagesDao;
 import com.personal.dao.PersonalInfoDao;
 import com.personal.model.ChildInfo;
 import com.personal.model.Events;
@@ -44,9 +45,9 @@ public class BaseController {
 	EventsDao eventDao;
 	@Autowired
 	ChildInfoDao childInfoDao;
-	@Autowired BaseFamilyImagesDao familyImagesDao;
+	@Autowired FamilyImagesDao familyImagesDao;
 	Logger log = Logger.getLogger(BaseController.class);
-	
+
 	@RequestMapping(value = "/personal")
 	public String getPersonalPage(ModelMap model) {
 		System.out.println("this is the sample sample page...");
@@ -115,11 +116,12 @@ public class BaseController {
 	}*/
 
 	@RequestMapping(value = "/eventHome")
-	public String getEventHomePage(ModelMap model, HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
+	public String getEventHomePage(ModelMap model, HttpServletRequest request)
+			throws JsonGenerationException, JsonMappingException, IOException {
 		List<Events> eventsList = eventDao.getAll();
 		ObjectMapper mapper = null;
 		String json = "";
-		if(eventsList != null && eventsList.size() > 0){
+		if (eventsList != null && eventsList.size() > 0) {
 			mapper = new ObjectMapper();
 			json = mapper.writeValueAsString(eventsList);
 			request.setAttribute("eventsList", json);
@@ -128,45 +130,69 @@ public class BaseController {
 		System.out.println("alumini page...");
 		return "event";
 	}
+
+	
 	@RequestMapping(value = "/eventsregHome")
-	public String geteventsregHomePage(ModelMap model, HttpSession session) {
-		PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
-		if(sessinBean != null){
-			return "eventsreg";	
+	public String geteventsregHomePage(ModelMap model, HttpServletRequest request) {
+		System.out.println("eventsreg........");
+		String eventId = request.getParameter("eventId");
+		ObjectMapper mapper = null;
+		String json = "";
+		try{
+		if (StringUtils.isNotBlank(eventId)) {
+			List<Events> eventsList = eventDao.getEvent(Integer.parseInt(eventId));
+			if (eventsList != null) {
+				System.out.println(eventsList.get(0).getEventDate());
+				mapper = new ObjectMapper();
+				json = mapper.writeValueAsString(eventsList);
+				request.setAttribute("eventsList1", json);
+				System.out.println(json);
+			}
 		}else{
-			return "aluminiHome";
+			request.setAttribute("eventsList1", "null");
 		}
+		}catch(Exception e){
+			
+		}
+
+		return "eventsreg";
 	}
 
 	@RequestMapping(value = "/regHome")
-	public String getRegHomePage(ModelMap model) {
-		System.out.println("alumini page...");
-		return "reg";
+	public String getRegHomePage(Model model, HttpSession session, HttpServletRequest request) {
+		PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
+		if(sessinBean != null){
+			PersonalInfo localBean = personalInfoDao.getPersonalInfo(sessinBean.getRollNo());
+			request.setAttribute("pBean", localBean );
+			return "reg";
+		}else{
+			return "redirect:aluminiHome";
+		}
 	}
 
+	
 	@RequestMapping(value = "/facultyHome")
 	public String getFacultyHomePage(ModelMap model, HttpServletRequest request) {
 		System.out.println("alumini page...");
 		List<FacultyInfo> listFacultyInfo = null;
 		String responce = null;
-		try{
-			listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
+		try {
+			listFacultyInfo = facultyInfoDao.getFacultyInfoAll();
 			ObjectMapper mapper = new ObjectMapper();
 			responce = mapper.writeValueAsString(listFacultyInfo);
 			request.setAttribute("facultyDetails", responce);
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
-		
 		return "faculty";
 	}
+
 	@RequestMapping(value = "/facultyentry")
 	public String getFacultyEntry(ModelMap model, HttpServletRequest objRequest, HttpSession session) {
 
 		List<FacultyInfo> listFacultyInfo = null;
-		String json  = "";
+		String json = "";
 		try {
-			
 			PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
 			if(sessinBean != null){
 				listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
@@ -175,7 +201,7 @@ public class BaseController {
 				objRequest.setAttribute("facultyOrders", json);
 				return "facreg";
 			}else{
-				return "aluminiHome";
+				return "redirect:aluminiHome";
 			}
 		} catch (Exception e) {
 			log.error("Exception in getting rollnos", e);
@@ -190,13 +216,12 @@ public class BaseController {
 	}
 
 	@ModelAttribute("rollNos")
-	public @ResponseBody String getRollNos(
-			@ModelAttribute PersonalInfo personalInfo, ModelMap model,
+	public @ResponseBody String getRollNos(@ModelAttribute PersonalInfo personalInfo, ModelMap model,
 			HttpServletRequest request) {
 		Map<String, String> listRollNos = null;
-		String json  = "";
+		String json = "";
 		try {
-			listRollNos =personalInfoDao.getRollNos() ;
+			listRollNos = personalInfoDao.getRollNos();
 			ObjectMapper mapper = new ObjectMapper();
 			json = mapper.writeValueAsString(listRollNos);
 		} catch (Exception e) {
@@ -206,8 +231,7 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/importRollCSV")
-	public @ResponseBody String importCSVData(
-			@ModelAttribute PersonalInfo personalInfo, ModelMap model,
+	public @ResponseBody String importCSVData(@ModelAttribute PersonalInfo personalInfo, ModelMap model,
 			HttpServletRequest request) {
 		System.out.println("inside the controller");
 		String s = request.getParameter("jso");
@@ -224,8 +248,7 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/importFacCsv")
-	public @ResponseBody String importFacCsv(
-			@ModelAttribute FacultyInfo facultyInfo, ModelMap model,
+	public @ResponseBody String importFacCsv(@ModelAttribute FacultyInfo facultyInfo, ModelMap model,
 			HttpServletRequest request) {
 		String s = request.getParameter("jso");
 		System.out.println(s);

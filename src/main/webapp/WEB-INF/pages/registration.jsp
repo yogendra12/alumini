@@ -386,7 +386,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="service_name">Name</label>  
                                             <div class="col-md-5">
-                                                <input id="reg_name" name="reg_name"  value='${LoginBean.name}' type="text" placeholder="Please Enter Name" pattern="[a-zA-Z0-9\s]+" oninvalid="InvalidName(this);" oninput="InvalidName(this);" required aria-required="true" class="form-control input-md">    
+                                                <input id="reg_name" name="reg_name"  value='${pBean.name}' type="text" placeholder="Please Enter Name" pattern="[a-zA-Z0-9\s]+" oninvalid="InvalidName(this);" oninput="InvalidName(this);" required aria-required="true" class="form-control input-md">    
                                             </div>
                                         </div>
                                         <br>
@@ -395,7 +395,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="service_architecture">Email</label>  
                                             <div class="col-md-5">
-                                                <input id="reg_email" name="service_architecture" type="text" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" required aria-required="true" pattern="[^ @]*@[^ @]*" placeholder="Enter your email" class="form-control input-md">    
+                                                <input id="reg_email" name="service_architecture" value='${pBean.email}' type="text" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" required aria-required="true" pattern="[^ @]*@[^ @]*" placeholder="Enter your email" class="form-control input-md">    
                                             </div>
                                         </div>
                                         <br>
@@ -404,7 +404,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="fn">Contact Number</label>  
                                             <div class="col-md-5">
-                                                <input id="reg_contactno" name="contactno" type="text" pattern="^\d{10}$" required aria-required="true" placeholder="Contact Number" class="form-control input-md">
+                                                <input id="reg_contactno" name="contactno" type="text"  value='${pBean.contactNo}' pattern="^\d{10}$" required aria-required="true" placeholder="Contact Number" class="form-control input-md">
                                             </div>
                                         </div>
                                         <br>
@@ -413,7 +413,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="ln">Date of Birth</label>
                                             <div class="col-md-5">
-                                                <input id="reg_dob" name="ln" type="text" required aria-required="true" placeholder="dd/mm/yyy" class="form-control input-md">
+                                                <input id="reg_dob" name="ln" type="text" required aria-required="true"  value='${pBean.dateOfBirth}' placeholder="dd/mm/yyy" class="form-control input-md">
                                             </div>
                                         </div>
                                         <br>
@@ -422,7 +422,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="city">City / Town</label>  
                                             <div class="col-md-5">
-                                                <input id="reg_city" name="city" type="text" placeholder="City / Town" required aria-required="true" class="form-control input-md">
+                                                <input id="reg_city" name="city" type="text" placeholder="City / Town" required aria-required="true"  value='${pBean.city}' class="form-control input-md">
                                             </div>
                                         </div>
                                         <br>
@@ -469,13 +469,29 @@
                                 </div>
                                 <!----- photos div starts -->
                                 <div class="col-sm-3" style="background-color:white;" id="gallery">
-                                    <div class="col-sm-12" style="background-color:white;" id="galleryimages"><h3><br></h3>
-                                        <img class="col-md-12" src="images/3.jpg"/>
+                                
+                                <div class="col-sm-12" style="background-color:white;" id="galleryimages"><h3><br></h3>
+                                <c:choose>
+                                <c:when test="${not empty pBean.oldPhotoPath}">
+                                <img id='oldImgPath' class="col-md-12" src="${pBean.oldPhotoPath}"/>
+                                </c:when>
+                                 <c:otherwise>
+                                <img id='oldImgPath' class="col-md-12" src="https://s3-us-west-2.amazonaws.com/alumini-public-images/blankMale.jpeg"/>
+                                </c:otherwise>
+                                </c:choose>
                                     </div>
                                     <div class="col-sm-12" style="background-color:white;" id="galleryimages"><h3><br></h3>
-                                        <img class="col-md-12" src="images/1.jpg"/>
-                                    </div>
+								<c:choose>
+                                <c:when test="${not empty pBean.newPhotoPath}">
+                                <img id='newImgPath' class="col-md-12" src="${pBean.newPhotoPath}"/>
+                                </c:when>
+                                 <c:otherwise>
+                                <img id='newImgPath' class="col-md-12" src="https://s3-us-west-2.amazonaws.com/alumini-public-images/blankMale.jpeg"/>
+                                </c:otherwise>
+                                </c:choose>
+	                                    </div>
                                 </div>
+                                
                                 <!----- photos div end -->
                         </div>
                         <div class="col-sm-12 col-xs-12" id="nextbutton">
@@ -498,14 +514,14 @@
                                         <div class="form-group col-md-12">
                                             <label class="col-md-4 control-label" for="service_name">Name</label>  
                                             <div class="col-md-5">
-                                                <input id="spouse_Name" name="service_name" type="text" placeholder="Name" oninvalid="InvalidName(this);" oninput="InvalidName(this);" required aria-required="true" class="form-control input-md">
+                                                <input id="spouse_Name" value='${pBean.spouseName}' name="service_name" type="text" placeholder="Name" oninvalid="InvalidName(this);" oninput="InvalidName(this);" required aria-required="true" class="form-control input-md">
                                             </div>
                                         </div>
                                         <div class="clear-fix"></div>
                                         <div class="form-group col-md-12">
                                             <label class="col-md-4 control-label" for="service_name">About</label>  
                                             <div class="col-md-5">
-                                                <textarea id="spouse_desc" name="service_name" type="textarea" rows="3" cols="30" placeholder="About Spouse"required aria-required="true" class="form-control input-md"></textarea>
+                                                <textarea id="spouse_desc"   name="service_name" type="textarea" rows="3" cols="30" placeholder="About Spouse"required aria-required="true" class="form-control input-md">${pBean.aboutSouse}</textarea>
                                             </div>
                                         </div>
                                         <div class="clear-fix"></div>
@@ -517,9 +533,18 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-xs-12">
-                                        <img class="col-md-12 col-xs-12 paddingzeroxs"src="images/bird1.png"/>
+                                    <c:choose>
+                                    <c:when test="${not empty pBean.spousePhoto}">
+                                        <img class="col-md-12 col-xs-12 paddingzeroxs" id='spouseImgUrl' src="${pBean.spousePhoto}"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="col-md-12 col-xs-12 paddingzeroxs" id='spouseImgUrl' src="https://s3-us-west-2.amazonaws.com/alumini-public-images/blankFemale.jpeg"/>
+                                    </c:otherwise>
+                                    </c:choose>
+                                    
                                     </div>
                                 </div>
+                                <div  style="float:right; padding-right: 120px; padding-top: 5px;" ><input type='button' value='Save' id='spouseSaveId'></div>
                             </div>
                         </div>
                     </div>
@@ -532,12 +557,12 @@
                                 <table class="table table-bordered table-hover" id="tab_logic">
                                     <thead>
                                         <tr >
-                                            <th class="text-center checkboxfieldwidth" id="select-font-xs">
+                                            <!-- <th class="text-center checkboxfieldwidth" id="select-font-xs">
                                                 Select
                                             </th>
                                             <th class="text-center photofieldwidth">
                                                 Photo
-                                            </th>
+                                            </th> -->
                                             <th class="text-center namewidth">
                                                 Name
                                             </th>
@@ -550,25 +575,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr id='addr0'>
-                                            <td>
-                                                <!-- <p class="snopadding">1</p>-->
+                                        <tr class='addedRows' id='addr0'>
+                                            <!-- <td>
                                                 <p class="checkboxpadding"><input type="checkbox" id="child_select" required aria-required="true" name="number" value="select"/></p>
                                             </td>
                                             <td>
                                                 <img src="images/bird1.png" name="image" class="imageSpace photofieldwidth photofieldwidthxs"/>
+                                            </td> -->
+                                            <td>
+                                                <p class="columnpadding"><input type="text"id="childNameId0" name='name0'  placeholder='Name' class="form-control"/></p>
                                             </td>
                                             <td>
-                                                <p class="columnpadding"><input type="text"id="child_name" name='name0'  placeholder='Name' class="form-control"/></p>
+                                                <p class="columnpadding"><input type="text" id="childAboutId0" name='about' placeholder='About' class="form-control"/></p>
                                             </td>
                                             <td>
-                                                <p class="columnpadding"><input type="text" id="child_about" name='about' placeholder='About' class="form-control"/></p>
+                                                <p class="columnpadding"><input type="file" name='photo' id="childFileId0" placeholder='Uploadphoto' class="form-control"/></p>
                                             </td>
                                             <td>
-                                                <p class="columnpadding"><input type="file" name='photo' id="child_photo" placeholder='Uploadphoto' class="form-control"/></p>
+                                                <p class="columnpadding"><input type="button" name='' value='Save' id="child_save0" placeholder='' class="ChildSave"/></p>
                                             </td>
                                         </tr>
-                                        <tr id='addr1'></tr>
+                                        <!-- <tr id='addr1'></tr> -->
                                     </tbody>
                                 </table>
                                 <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
@@ -585,12 +612,12 @@
                                     <table class="table table-bordered table-hover" id="tab_logic_family_photos">
                                         <thead>
                                             <tr >
-                                                <th class="text-center checkboxfieldwidth">
+                                                <!-- <th class="text-center checkboxfieldwidth">
                                                     Select
                                                 </th>
                                                 <th class="text-center photofieldwidth"  >
                                                     Photo
-                                                </th>
+                                                </th> -->
                                                 <th class="text-center photouploadfieldwidth" id="uploadphotofont-xs">
                                                     Upload Photo
                                                 </th>
@@ -604,20 +631,23 @@
                                         </thead>
                                         <tbody>
                                             <tr id='family_photos0'>
-                                                <td>
+                                                <!-- <td>
                                                     <p class="checkboxpadding"><input type="checkbox" name="number" value="select"/></p>
                                                 </td>
                                                 <td>
                                                     <img src="images/bird1.png" name="image" class="imageSpace photofieldwidth"/>
+                                                </td> -->
+                                                <td>
+                                                    <p class="columnpadding"><input type="file"  name='photo'  placeholder='photo' id='familyPhoto0' class="form-control photouploadfieldwidth" /></p>
                                                 </td>
                                                 <td>
-                                                    <p class="columnpadding"><input type="file"  name='photo'  placeholder='photo' class="form-control photouploadfieldwidth" id="familyphotoupload"/></p>
+                                                    <p class="columnpadding"><input type="text" name='description' placeholder='Description' id='familyPhotoDesc0' class="form-control"/></p>
                                                 </td>
                                                 <td>
-                                                    <p class="columnpadding"><input type="text" name='description' placeholder='Description' class="form-control"/></p>
+                                                    <p class="privacypadding"><input type="checkbox" name='privacy' placeholder='privacy' id='familyPhotoPublic0' class="form-control privacy-field-width" /></p>
                                                 </td>
                                                 <td>
-                                                    <p class="privacypadding"><input type="checkbox" name='privacy' placeholder='privacy' class="form-control privacy-field-width" id="checkboxstyle"/></p>
+                                                    <p class="privacypadding"><input type="button" value='Save' placeholder='' id='photoSaveId0'  class="SaveFamilyImage" /></p>
                                                 </td>
                                            </tr>
                                             <tr id='family_photos1'></tr>
@@ -631,7 +661,7 @@
                     <div class="col-xs-12">
                         <div class="col-md-12">
                             <!--<h3> Preview & Submit</h3>-->
-                            <button class="btn btn-primary btn-md pull-right" id='form2_save' type="submit">Save</button>
+                            <!-- <button class="btn btn-primary btn-md pull-right" id='form2_save' type="submit">Save</button> -->
                         </div>
                     </div>
                     <!--  <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->

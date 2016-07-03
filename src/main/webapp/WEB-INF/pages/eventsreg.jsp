@@ -77,11 +77,39 @@
 </head>
 <body>
 	<script type="text/javascript">
+	var eventId=0;
+	$(document).ready(function(){
+		var eventList1 =${eventsList1};
+		function pad(s, width, character) {
+		    return new Array(width - s.toString().length + 1).join(character) + s;
+		}
+
+		$("#event_form").attr('action', "eventRegisterUser");
+		if (eventList1 != null){
+			$.each(eventList1, function(key,val){
+				eventId = val.eventId;
+				$("#event_name").val(val.eventName);
+				var maxDate = new Date(val.eventDate);
+				var maxDateFormatted =
+				    maxDate.getFullYear() +
+				    '/' + pad(maxDate.getMonth() + 1, 2, '0') +
+				    '/' + pad(maxDate.getDate(), 2, '0');
+				
+				$("#event_date").val(maxDateFormatted);
+				$("#event_desc").val(val.eventDescription);
+				$("#imagePath").attr('src', val.eventPhotosPath);
+				$("#event_form").attr('action', "eventUpdateUser");
+				
+				
+			});
+		}
+	});
 		$(document).ready(function() {
 			$('#event_date').datepicker({
-				format : "dd/mm/yyyy"
+				format : "yyyy/mm/dd"
 			});
 		});
+		
 		
 	</script>
 
@@ -101,13 +129,17 @@
 				</div>
 			</div>
 		</div> -->
-		<div class="col-md-12 marLeft7 marginTop15">
+		<%-- <div class="col-md-12 marLeft7 marginTop15">
 			<div class="row setup-content" id="step-1">
-		<div class="panel panel-orange">
+				<div class="panel panel-orange">
+					<div class="panel-heading panelHead-orange">New Event</div>
+					<div class="panel-body"><div id="messageId"></div>
+						<form  id="event_form" onsubmit="return false;" enctype="multipart/form-data" method="post" action="">
+		<div class="panel panel-orange"> --%>
 			<!-- 						<div class="panel-heading panelHead-orange">New Event</div> -->
 		<div class="panel-heading minHeight50" style="font-size: 20px; align: center; text-align: center; background-color: cadetblue; border-color: cadetblue">
 			New Event</div>
-					<div class="panel-body">
+					<div class="panel-body" style='background: beige'>
 						<form  onsubmit="return false;" enctype="multipart/form-data" method="post">
 							<div class="col-xs-12 col-xs-6" id="your-details-div">
 								<div class="col-md-12 paddingleftzeroxs">
@@ -135,6 +167,7 @@
 										<label class="col-md-4 control-label" for="ln">Event
 											Photo(s)</label>
 										<div class="col-md-5">
+										<img id="imagePath" src='' name='image' class='imageSpace'>
 											<input id="event_photo" type="file" class="input-file"
 												placeholder="Event Photo(s)">
 											<div

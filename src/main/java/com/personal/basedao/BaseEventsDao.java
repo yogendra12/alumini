@@ -60,6 +60,7 @@ public class BaseEventsDao {
 							events.getEventDate(), events.getUpdatedBy(),
 							events.getUpdatedDate(),
 							events.getEventPhotosPath(), events.getEventId() });
+			System.out.println(sql);
 			if (update > 0) {
 				isUpdate = true;
 			}
@@ -86,7 +87,23 @@ public class BaseEventsDao {
 		return isDelete;
 	}
 
-	public Events getEvent(int id) {
+	public List<Events> getEvent(int id) {
+		List<Events> retlist = null;
+		try {
+			String sql = "SELECT * from events where eventId = ? ";
+			retlist = jdbcTemplate.query(sql, new Object[] {id},
+					ParameterizedBeanPropertyRowMapper
+							.newInstance(Events.class));
+			if (retlist.size() > 0)
+				return retlist;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	public Events getEvent1(int id) {
 		List<Events> retlist = null;
 		try {
 			String sql = "SELECT * from events where eventId = ? ";

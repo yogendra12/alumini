@@ -17,7 +17,7 @@ public class BasePersonalInfoDao {
 	@Autowired
 	public JdbcTemplate jdbcTemplate;
 
-	public final String INSERT_SQL = "INSERT INTO personal_Info( rollNo, password, name,  email,contact_no, dob, city, country, aboutYou,spouseName,aboutSouse,updatedBy,updatedDate) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
+	public final String INSERT_SQL = "INSERT INTO personal_Info( rollNo, password, name,  email,contact_no, dob, city, country, aboutYou,spouseName,aboutSouse,updatedBy,updatedDate,spousePhoto) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
 
 	public boolean savePersonalInfo(PersonalInfo personalInfo) {
 		int update = 0;
@@ -30,7 +30,7 @@ public class BasePersonalInfoDao {
 					personalInfo.getCity(), personalInfo.getCountry(),
 					personalInfo.getAboutSouse(), personalInfo.getSpouseName(),
 					personalInfo.getAboutSouse(), personalInfo.getUpdatedBy(),
-					personalInfo.getUpdatedDate() });
+					personalInfo.getUpdatedDate(), personalInfo.getSpousePhoto() });
 
 			if (update > 0) {
 				isSave = true;
@@ -47,7 +47,7 @@ public class BasePersonalInfoDao {
 		boolean isUpdate = false;
 		try {
 			String sql = "UPDATE  personal_info  set  password = ? ,name = ? ,email = ?,contactNo = ?  ,dob = ? ,city = ? "
-					+ ",country = ? ,aboutYou = ? ,spouseName = ?,aboutSouse=?, new_photo_path=?,old_photo_path=?,updatedBy =?,updatedDate=? where rollNo = ?";
+					+ ",country = ? ,aboutYou = ? ,spouseName = ?,aboutSouse=?, new_photo_path=?,old_photo_path=?,updatedBy =?,updatedDate=?, spousePhoto= ? where rollNo = ?";
 
 			update = jdbcTemplate.update(sql,
 					new Object[] { personalInfo.getPassword(),
@@ -62,6 +62,7 @@ public class BasePersonalInfoDao {
 							personalInfo.getOldPhotoPath(),
 							personalInfo.getUpdatedBy(),
 							personalInfo.getUpdatedDate(),
+							personalInfo.getSpousePhoto(),
 							personalInfo.getRollNo() });
 			if (update > 0) {
 				isUpdate = true;

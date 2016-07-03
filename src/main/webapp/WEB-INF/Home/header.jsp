@@ -40,7 +40,7 @@
 					width="18px" alt="Logo name"></a>
 			</div>
 			
-			<form id="signin" class="navbar-form navbar-right zero-padding"
+			<form id="signin" onsubmit="return false;" class="navbar-form navbar-right zero-padding"
 				role="form">
 				<div class="col-xs-12 zero-padding" id="logindivid">
 					<div class="col-xs-5 input-group pull-left" id="username">

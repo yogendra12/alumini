@@ -248,8 +248,10 @@
 	</div>
 </div>
 <script >
+var lRollNo;
 $(document).ready(function(){
 	 var personalData = ${listPersonal};
+	 lRollNo = '${LoginBean.rollNo}'; 
 	getPersonalInfo(personalData);
 });
 </script>

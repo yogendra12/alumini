@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,61 +44,84 @@ public class eventRegController {
 			@ModelAttribute Events events,@RequestParam("file") List<MultipartFile> multipartFile, HttpSession session) {
 		boolean isInsert = false;
 		JSONObject json = null;
-		String keyName=null;
+		String photoPath = null;
 		try {
 			json=new JSONObject();
 			
-				AWSS3Util obj= new AWSS3Util();
 				if (!multipartFile.isEmpty()){
 				json = new JSONObject();
-				int i =0;
-				String imgUrl = null;
 				for(MultipartFile file: multipartFile){
-					
-					keyName = AluminiCommonUtils.getRandomNum();
-					byte[] bytes = file.getBytes();
-
-					// Creating the directory to store file
-					String rootPath = System.getProperty("catalina.home");
-					File dir = new File(rootPath + File.separator + "tmpFiles");
-					if (!dir.exists())
-						dir.mkdirs();
-
-					// Create the file on server
-					File serverFile = new File(dir.getAbsolutePath()+ File.separator + keyName);
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-					stream.write(bytes);
-					stream.close();
-
-					
-					//System.out.println(file.getName());
-					
-					//MultipartFile mf = (MultipartFile)request.getParameter("");
-					
-					imgUrl = obj.uploadfile(serverFile, true, keyName);
-					if (i==0){
-						json.put("old", imgUrl);	
+					if (!multipartFile.isEmpty()){
+							photoPath = AWSS3Util.ImageUpload(file);
 					}
-			
+						}
+				if(StringUtils.isNotBlank(photoPath)){
+					events.setEventPhotosPath(photoPath);	
 				}
-
+				
+			}
 				events.setUpdatedBy("RRRRRR");
-				events.setEventPhotosPath(imgUrl);
+				
+				
 				isInsert = eventsDao.save(events);
 				
-			System.out.println("hiiiiiiiiiiiiiiii");
-				//isInsert=true;
 				if (isInsert) {
-					json.put("200", "User registration successfull");
+					json.put("status_code", 200);
 				} else {
-					json.put("400", "User registration fail");
+					json.put("status_code", 400);
 				}
-			}
+				
+				
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+			json.put("status_code", 500);
+			
+			// TODO: handle exception
 		}
+		json.put("type", "Save Success");
 				return json.toString() ;
+		}
+		@RequestMapping("/eventUpdateUser")
+	public @ResponseBody String eventUpdateUser(
+			@ModelAttribute Events events,@RequestParam("file") List<MultipartFile> multipartFile, HttpSession session) {
+		JSONObject reponse =new JSONObject();
+		Events eventObj = null;
+		String photoPath = null;
+		 eventObj = eventsDao.getEvent1(events.getEventId());
+		 if(eventObj != null && eventObj.getEventId() >0){
+				try {
+					photoPath = eventObj.getEventPhotosPath();
+					 if(StringUtils.isNotBlank(events.getEventDescription())){
+						 eventObj.setEventDescription(events.getEventDescription().trim());
+					 }
+					 if(events.getEventDate() != null){
+						 eventObj.setEventDate(events.getEventDate());
+					 }
+					 if(StringUtils.isNotBlank(events.getEventName())){
+						 eventObj.setEventName(events.getEventName().trim());
+					 }
+						if (!multipartFile.isEmpty()){
+							for (MultipartFile file : multipartFile) {
+								photoPath = AWSS3Util.ImageUpload(file);
+							}
+						}
+						eventObj.setUpdatedBy("RRRRRR");
+						if(StringUtils.isNotBlank(photoPath)){
+							eventObj.setEventPhotosPath(photoPath);	
+						}
+						if (eventsDao.updateEvent(eventObj)) {
+							reponse.put("status_code", 200);
+						} else {
+							reponse.put("status_code", 400);
+						}
+				} catch (Exception e) {
+					e.printStackTrace();
+					reponse.put("status_code", "500");
+				}
+			 
+		 }
+		 		reponse.put("type", "Update Success");
+				return reponse.toString() ;
 		}
 }
