@@ -116,7 +116,7 @@
 
 
 	<div class="container" id="registrationbody">
-		<div class="stepwizard">
+		<!-- <div class="stepwizard">
 			<div class="stepwizard-row setup-panel">
 				<div class="stepwizard-step">
 					<a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
@@ -128,13 +128,19 @@
 					<p>Family Details</p>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-12 marLeft7 marginTop15">
+		</div> -->
+		<%-- <div class="col-md-12 marLeft7 marginTop15">
 			<div class="row setup-content" id="step-1">
 				<div class="panel panel-orange">
 					<div class="panel-heading panelHead-orange">New Event</div>
 					<div class="panel-body"><div id="messageId"></div>
 						<form  id="event_form" onsubmit="return false;" enctype="multipart/form-data" method="post" action="">
+		<div class="panel panel-orange"> --%>
+			<!-- 						<div class="panel-heading panelHead-orange">New Event</div> -->
+		<div class="panel-heading minHeight50" style="font-size: 20px; align: center; text-align: center; background-color: cadetblue; border-color: cadetblue">
+			New Event</div>
+					<div class="panel-body">
+						<form  onsubmit="return false;" enctype="multipart/form-data" method="post">
 							<div class="col-xs-12 col-xs-6" id="your-details-div">
 								<div class="col-md-12 paddingleftzeroxs">
 									<!-- Select Basic -->

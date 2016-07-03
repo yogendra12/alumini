@@ -100,9 +100,9 @@ $(document).ready(function(){
 	}
 	
 	var eventList ='${eventsList}';
+	var eventList =${eventsList};
 	var html = "";
 	if(eventList != ""){
-		var obj = JSON.parse(eventList);
 		$('#panelBodyId').html('');
 		$.each(obj, function(key,val){
 			var maxDate = new Date(val.eventDate);
@@ -115,6 +115,14 @@ $(document).ready(function(){
 			'<span class="events-list-date">'+maxDateFormatted+'</span><h4>'+
 			'<a href="#" title="Insert event title here" id='+val.eventId+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4><p>'+val.eventDescription+'</p></div></div>'+
 			'<input type="button" id='+val.eventId+' value="update" onclick="openEventReg(this.id);">';
+/* =======
+		$.each(eventList, function(key,val){
+			 html = '<div class="col-md-12" style="padding: 5px;"><div class="col-md-3">'+
+			'<img class="img-responsive" src='+val.eventPhotosPath+'></div><div class="col-md-9">'+
+			'<span class="events-list-date">'+val.eventDate+'</span><h4>'+
+			'<a href="#" title="Insert event title here" id='+val.id+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4>'+
+			'<p>'+val.eventDescription+'</p></div></div>';
+>>>>>>> e8da9d5f5a8d10d8906d820c970963c7645e4914 */
 			 $('#panelBodyId').append(html);	
 		});
 	}

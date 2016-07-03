@@ -101,15 +101,18 @@
 	style="border-radius: 0 !important;">
 	<ul class="nav navbar-nav">
 		<li><a href="aluminiHome">Home</a></li>
-		<li><a href="galleryHome">Gallery</a></li>
+		<!-- <li><a href="galleryHome">Gallery</a></li> -->
 		<li><a href="eventHome">Events</a></li>
-		<li><a href="eventsregHome">Events Registration</a></li>
+		<li><a href="facultyHome">Faculty</a></li>
+		
 		<c:if test="${not empty LoginBean}">
 			<li><a href="regHome">Registration</a></li>
+			<li><a href="eventsregHome">New Event</a></li>
+			<li><a href="facultyentry">Update Faculty</a></li>
 		</c:if>
-		<li><a href="facultyHome">Faculty</a></li>
-		<li><a href="facultyentry">Faculty</a></li>
-		<li><a href="aboutHome">Aboutus</a></li>
+		
+		
+		<!-- <li><a href="aboutHome">Aboutus</a></li> -->
 	</ul>
 
 </nav>

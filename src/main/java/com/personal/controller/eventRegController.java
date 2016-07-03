@@ -77,6 +77,7 @@ public class eventRegController {
 			e.printStackTrace();
 			json.put("status_code", 500);
 			
+			// TODO: handle exception
 		}
 		json.put("type", "Save Success");
 				return json.toString() ;

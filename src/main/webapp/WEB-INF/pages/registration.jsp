@@ -360,7 +360,7 @@ $("#reg_rollno").attr('disabled', 'disabled');
                         <div class="panel-body">
                                 <div class="col-xs-12 col-xs-6" id = "your-details-div">
                                     <div class="col-md-12 paddingleftzeroxs">
-                                        <p class="text-left" id="yourdetails"> Your Details</p>
+                              <!--           <p class="text-left" id="yourdetails"> Your Details</p> -->
                                         <!-- Select Basic -->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="stack_id">Roll No</label>
