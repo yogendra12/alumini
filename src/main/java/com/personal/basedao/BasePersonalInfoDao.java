@@ -126,7 +126,7 @@ public class BasePersonalInfoDao {
 		List<PersonalInfo> retlist = null;
 		try {
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT * from personal_info ");
+			sql.append("SELECT * from personal_info");
 			if(StringUtils.isNotEmpty(params)){
 			sql.append(" where isVerified = 1");	
 			}

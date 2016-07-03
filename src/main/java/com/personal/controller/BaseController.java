@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -22,9 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.personal.basedao.BaseFamilyImagesDao;
+import com.personal.basemodel.FamilyImages;
+import com.personal.dao.ChildInfoDao;
 import com.personal.dao.EventsDao;
 import com.personal.dao.FacultyInfoDao;
 import com.personal.dao.PersonalInfoDao;
+import com.personal.model.ChildInfo;
 import com.personal.model.Events;
 import com.personal.model.FacultyInfo;
 import com.personal.model.PersonalInfo;
@@ -37,6 +42,9 @@ public class BaseController {
 	FacultyInfoDao facultyInfoDao;
 	@Autowired
 	EventsDao eventDao;
+	@Autowired
+	ChildInfoDao childInfoDao;
+	@Autowired BaseFamilyImagesDao familyImagesDao;
 	Logger log = Logger.getLogger(BaseController.class);
 	
 	@RequestMapping(value = "/personal")
@@ -51,20 +59,23 @@ public class BaseController {
 		String json = "";
 		List<PersonalInfo> finalList = null;
 		List<PersonalInfo> listPersonalInfo =   personalInfoDao.getPersonalInfoAll("verified");
+		List<ChildInfo> finalChildList = null;
 		if(listPersonalInfo != null && listPersonalInfo.size() > 0){
 			finalList = new ArrayList<PersonalInfo>();
 			for(PersonalInfo localPersonalInfo : listPersonalInfo ){
+				
+				
 				if(StringUtils.isEmpty(localPersonalInfo.getDateOfBirth())){
 					localPersonalInfo.setDateOfBirth("");
 				}
 				if(StringUtils.isEmpty(localPersonalInfo.getOldPhotoPath())){
-					localPersonalInfo.setOldPhotoPath("images/KlceLogo6.png");
+					localPersonalInfo.setOldPhotoPath("https://s3-us-west-2.amazonaws.com/alumini-public-images/blankMale.jpeg");
 				}
 				if(StringUtils.isEmpty(localPersonalInfo.getNewPhotoPath())){
-					localPersonalInfo.setNewPhotoPath("images/KlceLogo6.png");
+					localPersonalInfo.setNewPhotoPath("https://s3-us-west-2.amazonaws.com/alumini-public-images/blankMale.jpeg");
 				}
 				if(StringUtils.isEmpty(localPersonalInfo.getSpousePhoto())){
-					localPersonalInfo.setSpousePhoto("images/KlceLogo6.png");
+					localPersonalInfo.setSpousePhoto("https://s3-us-west-2.amazonaws.com/alumini-public-images/blankFemale.jpeg");
 				}
 				if(StringUtils.isEmpty(localPersonalInfo.getSpouseName())){
 					localPersonalInfo.setSpouseName("");
@@ -73,19 +84,35 @@ public class BaseController {
 					localPersonalInfo.setAboutSouse("");
 				}
 				finalList.add(localPersonalInfo);
+				//child info
+				List<ChildInfo> listChildInfo =  childInfoDao.getChildrenInfoAll(localPersonalInfo.getRollNo());
+				if (listChildInfo != null && listChildInfo.size()>0){
+					finalChildList = new ArrayList<ChildInfo>();
+					for(ChildInfo localChildInfo :listChildInfo){
+						if(StringUtils.isEmpty(localChildInfo.getChildPhotoPath())){
+							localChildInfo.setChildPhotoPath("https://s3-us-west-2.amazonaws.com/alumini-public-images/blankChild.jpeg");
+						}
+						finalChildList.add(localChildInfo);
+					}
+					localPersonalInfo.setListChild(finalChildList);
+					
+					//family images
+					List<FamilyImages> listFamilyImages = familyImagesDao.getFamilyImagesAll(localPersonalInfo.getRollNo()); 
+					localPersonalInfo.setListFamilyImages(listFamilyImages);
+				}
 			}
 		}
 		ObjectMapper mapper = new ObjectMapper();
-		json = mapper.writeValueAsString(listPersonalInfo);
+		json = mapper.writeValueAsString(finalList);
 		request.setAttribute("listPersonal", json);
 		return "alumini";
 	}
 
-	@RequestMapping(value = "/galleryHome")
+	/*@RequestMapping(value = "/galleryHome")
 	public String getGalleryHomePage(ModelMap model) {
 		System.out.println("alumini page...");
 		return "gallery";
-	}
+	}*/
 
 	@RequestMapping(value = "/eventHome")
 	public String getEventHomePage(ModelMap model, HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
@@ -102,9 +129,13 @@ public class BaseController {
 		return "event";
 	}
 	@RequestMapping(value = "/eventsregHome")
-	public String geteventsregHomePage(ModelMap model) {
-		System.out.println("eventsreg........");
-		return "eventsreg";
+	public String geteventsregHomePage(ModelMap model, HttpSession session) {
+		PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
+		if(sessinBean != null){
+			return "eventsreg";	
+		}else{
+			return "aluminiHome";
+		}
 	}
 
 	@RequestMapping(value = "/regHome")
@@ -130,19 +161,26 @@ public class BaseController {
 		return "faculty";
 	}
 	@RequestMapping(value = "/facultyentry")
-	public String getFacultyEntry(ModelMap model, HttpServletRequest objRequest) {
+	public String getFacultyEntry(ModelMap model, HttpServletRequest objRequest, HttpSession session) {
 
 		List<FacultyInfo> listFacultyInfo = null;
 		String json  = "";
 		try {
-			listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
-			ObjectMapper mapper = new ObjectMapper();
-			json = mapper.writeValueAsString(listFacultyInfo);
-			 objRequest.setAttribute("facultyOrders", json);
+			
+			PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
+			if(sessinBean != null){
+				listFacultyInfo =facultyInfoDao.getFacultyInfoAll() ;
+				ObjectMapper mapper = new ObjectMapper();
+				json = mapper.writeValueAsString(listFacultyInfo);
+				objRequest.setAttribute("facultyOrders", json);
+				return "facreg";
+			}else{
+				return "aluminiHome";
+			}
 		} catch (Exception e) {
 			log.error("Exception in getting rollnos", e);
+			return "aluminiHome";
 		}
-		return "facreg";
 	}
 
 	@RequestMapping(value = "/aboutHome")

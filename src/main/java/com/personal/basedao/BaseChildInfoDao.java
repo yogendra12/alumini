@@ -5,6 +5,7 @@ package com.personal.basedao;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -94,16 +95,20 @@ public class BaseChildInfoDao {
 		return null;
 	}
 
-	public List<ChildInfo> getChildrenInfoAll() {
+	public List<ChildInfo> getChildrenInfoAll(String rollNo) {
 		List<ChildInfo> retlist = null;
 		try {
-			String sql = "SELECT * from child_info  ";
-			retlist = jdbcTemplate.query(sql,
+			StringBuffer sBuffer = new StringBuffer();
+			sBuffer.append("SELECT * from child_info  ");
+			if(StringUtils.isNotBlank(rollNo)){
+				sBuffer.append(" where rollNo ='"+rollNo+"'");
+			}
+			retlist = jdbcTemplate.query(sBuffer.toString(),
 					ParameterizedBeanPropertyRowMapper
 							.newInstance(ChildInfo.class));
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return retlist;
 	}

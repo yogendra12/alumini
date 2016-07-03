@@ -31,6 +31,7 @@
 			format : "dd/mm/yyyy"
 		});
 
+		
 		$("#clickHerebtn").click(function() {
 			$("#clickHerebtn").hide();
 			$("#loginformid").fadeIn("slow");
@@ -48,9 +49,7 @@
 			$("#forgotpwdid").fadeOut("slow");
 			$("#clickHerebtn").show();
 		});
-var rollNo = '${sessionScope.LoginBean.rollNo}';
-$("#reg_rollno").val(rollNo);
-$("#reg_rollno").attr('disabled', 'disabled');	
+	
 	});
 </script>
 <style>
@@ -365,26 +364,29 @@ $("#reg_rollno").attr('disabled', 'disabled');
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="stack_id">Roll No</label>
                                             <div class="col-md-5">
-                                                <input id="reg_rollno" name="rollno" type="text" placeholder="Roll No" class="form-control input-md">
+                                                <input id="reg_rollno" name="rollno" type="text" value='${LoginBean.rollNo}'  disabled placeholder="Roll No" class="form-control input-md">
                                             </div> 
                                         </div>
                                         <br>
                                         <br>
                                         <!-- Text input-->
+                                        <c:if test="${LoginBean.isVerified eq 1}">
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="cmpny">Password</label>  
                                             <div class="col-md-5">
-                                                <input id="reg_pass" name="password"  type="password" placeholder="Password" oninvalid="validatePassword(this);" oninput="validatePassword(this);" required aria-required="true" class="form-control input-md">
+                                            	<%-- <c:out value='${LoginBean.isVerified}'></c:out> --%>
+                                                <input id="reg_pass" name="password"  type="text" value='${LoginBean.password}' placeholder="Password" oninvalid="validatePassword(this);" oninput="validatePassword(this);" required aria-required="true" class="form-control input-md">
                                                 <span class="red pw_span"></span>    
                                             </div>
                                         </div>
                                         <br>
-                                        <br>    
+                                        <br>
+                                        </c:if>    
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="service_name">Name</label>  
                                             <div class="col-md-5">
-                                                <input id="reg_name" name="reg_name" type="text" placeholder="Please Enter Name" pattern="[a-zA-Z0-9\s]+" oninvalid="InvalidName(this);" oninput="InvalidName(this);" required aria-required="true" class="form-control input-md">    
+                                                <input id="reg_name" name="reg_name"  value='${LoginBean.name}' type="text" placeholder="Please Enter Name" pattern="[a-zA-Z0-9\s]+" oninvalid="InvalidName(this);" oninput="InvalidName(this);" required aria-required="true" class="form-control input-md">    
                                             </div>
                                         </div>
                                         <br>
@@ -596,7 +598,7 @@ $("#reg_rollno").attr('disabled', 'disabled');
                                                     Description
                                                 </th>
                                                 <th class="text-center privacy-field-width">
-                                                    Privacy
+                                                    Public
                                                 </th>
                                             </tr>
                                         </thead>
@@ -650,4 +652,13 @@ $("#reg_rollno").attr('disabled', 'disabled');
 
 
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	//var rollNo1 = ${LoginBean.rollNo};
+	//$("#reg_rollno").val(rollNo1);	
+	//$("#reg_rollno").css('disabled', 'disabled');	
+})
+
+
+</script>
 </html>

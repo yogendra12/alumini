@@ -19,7 +19,7 @@ import com.personal.model.PersonalInfo;
 public class EmailUtil {
 	Logger objLogger = Logger.getLogger(EmailUtil.class);
 
-	public String sendEmail(PersonalInfo objVendorBean,
+	public static String sendEmail(PersonalInfo objPersonalBean,
 			ServletContext objContext) throws AddressException,
 			MessagingException, IOException {
 		String reslutString = null;
@@ -48,11 +48,11 @@ public class EmailUtil {
 							+ "logo.png"));
 			mailContent = prop.getProperty("forgot_password");
 			mailContent = mailContent
-					.replace("_name_", objVendorBean.getName());
+					.replace("_name_", objPersonalBean.getName());
 			mailContent = mailContent.replace("_user_",
-					objVendorBean.getRollNo());
+					objPersonalBean.getRollNo());
 			mailContent = mailContent.replace("_pass_",
-					objVendorBean.getPassword());
+					objPersonalBean.getPassword());
 
 			toAddress = prop.getProperty("adminemail");
 			ccAddress = prop.getProperty("ccadmin");

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +28,7 @@ import com.personal.model.ChildInfo;
 import com.personal.model.PersonalInfo;
 import com.personal.util.AWSS3Util;
 import com.personal.util.AluminiCommonUtils;
+import com.personal.util.EmailUtil;
 
 /**
  * @author koti
@@ -40,7 +42,7 @@ public class RegistrationController {
 	PersonalInfoDao personalDao;
 	@Autowired
 	ChildInfoDao childInfoDao;
-
+	@Autowired ServletContext objContext;
 	@RequestMapping("/registerUser")
 	public @ResponseBody String registerUser(
 			@ModelAttribute PersonalInfo personalInfo,@RequestParam("file") List<MultipartFile> multipartFile, HttpSession session) {
@@ -92,9 +94,11 @@ public class RegistrationController {
 				personalInfo.setUpdatedBy(sessinBean.getRollNo());
 				personalInfo.setOldPhotoPath(String.valueOf(json.get("old")));
 				personalInfo.setNewPhotoPath(String.valueOf(json.get("new")));
-				
+				String sRandom = String.valueOf(Math.round(Math.random() * 1000000));
+				personalInfo.setPassword(sRandom);
 				isInsert = personalDao.updatePersonalInfo(personalInfo);
 				if (isInsert) {
+					EmailUtil.sendEmail(personalInfo, objContext);
 					json.put("200", "User registration successfull");
 				} else {
 					json.put("400", "User registration fail");

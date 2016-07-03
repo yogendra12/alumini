@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	document.getElementById("reg_pass").oninvalid = validatePassword(document.getElementById("reg_pass"));
+	//document.getElementById("reg_pass").oninvalid = validatePassword(document.getElementById("reg_pass"));
 	
 	/*$('#reg_pass').on('blur',function(){
 		var pF = document.getElementById("reg_pass");
@@ -248,7 +248,7 @@ function registration(){
 	return false;
 }
 
-function validatePassword(input){
+/*function validatePassword(input){
 	
 	var value = input.value;
 	var reg = /[:\s\\]/;
@@ -261,7 +261,7 @@ function validatePassword(input){
     	input.setCustomValidity('');
     }
     
-}
+}*/
 
 
 
