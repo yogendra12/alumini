@@ -47,12 +47,12 @@ public class EmailUtil {
 					objContext.getRealPath("images" + File.separator
 							+ "logo.png"));
 			mailContent = prop.getProperty("forgot_password");
-			mailContent = mailContent
-					.replace("_name_", objVendorBean.getName());
+		/*	mailContent = mailContent
+					.replace("_name_", objPersonalBean.getName());
 			mailContent = mailContent.replace("_user_",
-					objVendorBean.getRollNo());
+					objPersonalBean.getRollNo());
 			mailContent = mailContent.replace("_pass_",
-					objVendorBean.getPassword());
+					objVendorBean.getPassword());*/
 			toAddress = objVendorBean.getEmail();
 /*//			toAddress = prop.getProperty("adminemail");
 */			ccAddress = prop.getProperty("ccadmin");

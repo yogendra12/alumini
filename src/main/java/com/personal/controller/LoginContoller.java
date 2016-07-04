@@ -37,9 +37,10 @@ public class LoginContoller {
 			pass = request.getParameter("pass");
 			if (StringUtils.isNotBlank(rollNo) && StringUtils.isNotBlank(pass)) {
 				PersonalInfo personalInfo = personalInfoDao.getPersonalInfo(rollNo);
-				if (personalInfo.getPassword() == pass || "123456".equals(pass)) {
+				if (personalInfo.getPassword().equals(pass)  ) {
 					session.setAttribute("LoginBean", personalInfo);
 					return "Succ";
+					
 				}
 			}
 			return "";

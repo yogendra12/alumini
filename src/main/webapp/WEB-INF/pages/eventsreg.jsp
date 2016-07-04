@@ -139,7 +139,7 @@
 			<!-- 						<div class="panel-heading panelHead-orange">New Event</div> -->
 		<div class="panel-heading minHeight50" style="font-size: 20px; align: center; text-align: center; background-color: cadetblue; border-color: cadetblue">
 			New Event</div>
-					<div class="panel-body">
+					<div class="panel-body" style='background: beige'>
 						<form  onsubmit="return false;" enctype="multipart/form-data" method="post">
 							<div class="col-xs-12 col-xs-6" id="your-details-div">
 								<div class="col-md-12 paddingleftzeroxs">

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	document.getElementById("reg_pass").oninvalid = validatePassword(document.getElementById("reg_pass"));
+	//document.getElementById("reg_pass").oninvalid = validatePassword(document.getElementById("reg_pass"));
 	
 	/*$('#reg_pass').on('blur',function(){
 		var pF = document.getElementById("reg_pass");
@@ -14,27 +14,31 @@ $(document).ready(function () {
 			 err = true;
 		}*/
      $("#add_row").click(function(){
-		  $('#addr'+i).html("<td><p class='checkboxpadding'><input  name='select"+i+"' type='checkbox' value='select' placeholder='select'  class='form-control input-md checkboxfieldwidth'></p></td><td><img src='../images/bird1.png' name='image' class='imageSpace photofieldwidth'/></td><td><p class='columnpadding'><input  name='name"+i+"' type='text' placeholder='Name'  class='form-control input-md'></p></td><td><p class='columnpadding'><input  name='about"+i+"' type='text' placeholder='About'  class='form-control input-md'></p></td><td><p class='columnpadding'><input  name='photo"+i+"' type='file' placeholder='photo'  class='form-control input-md'></p></td> ");
+    	 $('#tab_logic').append('<tr class="addedRows" id="addr'+(i)+'"></tr>');
+		  $('#addr'+i).html(/*"<td><p class='checkboxpadding'><input  name='select"+i+"' type='checkbox' value='select' placeholder='select'  class='form-control input-md checkboxfieldwidth'></p></td><td><img src='../images/bird1.png' name='image' class='imageSpace photofieldwidth'/></td>*/"<td><p class='columnpadding'><input  name='name"+i+"' id='childNameId"+i+"' type='text' placeholder='Name'  class='form-control input-md'></p></td><td><p class='columnpadding'><input  name='about"+i+"' id='childAboutId"+i+"' type='text' placeholder='About'  class='form-control input-md'></p></td><td><p class='columnpadding'><input  name='photo"+i+"' id='childFileId"+i+"' type='file' placeholder='photo'  class='form-control input-md'></p></td><td><p class='columnpadding'><input type='button' value='Save' id='child_save"+i+"' placeholder='' class='ChildSave'/></p></td>");
 
-		  $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+		  /*$('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');*/
 		  i++; 
 	});
     $("#delete_row").click(function(){
     	 if(i>1){
 		 $("#addr"+(i-1)).html('');
+		 $("#addr"+(i-1)).remove();
 		 i--;
 		 }
 	 });
 
 	 var z=1;
      $(".container #add_row_family_photos").click(function(){			
-		  $('#family_photos'+z).html("<td><p class='checkboxpadding'><input  name='select"+i+"' type='checkbox' value='select' placeholder='select'  class='form-control input-md checkboxfieldwidth'></p></td><td><img src='../images/bird1.png' name='image' class='imageSpace photofieldwidth'/></td><td><p class='columnpadding'><input name='photo"+z+"' type='file' placeholder='Photo' class='form-control input-md photouploadfieldwidth'/></p></td><td><p class='columnpadding'><input  name='description"+z+"' type='text' placeholder='Description'  class='form-control input-md'></p></td><td><p class='privacypadding'><input  name='privacy"+z+"' type='checkbox' placeholder='privacy'  class='form-control input-md privacy-field-width'></p></td>");
-		  $('#tab_logic_family_photos').append('<tr id="family_photos'+(z+1)+'"></tr>');
+    	 $('#tab_logic_family_photos').append('<tr id="family_photos'+(z+1)+'"></tr>');
+    	 $('#family_photos'+z).html("<td><p class='columnpadding'><input name='familyPhoto"+z+"' type='file' placeholder='Photo' class='form-control input-md photouploadfieldwidth'/></p></td><td><p class='columnpadding'><input  name='familyPhotoDesc"+z+"' type='text' placeholder='Description'  class='form-control input-md'></p></td><td><p class='privacypadding'><input  name='familyPhotoPublic"+z+"' type='checkbox' placeholder='privacy'  class='form-control input-md privacy-field-width'></p></td><td><p class='privacypadding'><input type='button' name='' placeholder='' value='Save' id='photoSaveId0' class='SaveFamilyImage' /></p></td>");
+		 
 		  z++; 
 	});
      $("#delete_row_family_photos").click(function(){
     	 if(z>1){
 		 $("#family_photos"+(z-1)).html('');
+		 $("#family_photos"+(z-1)).remove();
 		 z--;
 		 }
 	 });
@@ -187,8 +191,14 @@ var fileInput1 = document.getElementById('action_json');
 $(document).on('click', '#form1_save', function(){
 	registration();
 });
-$(document).on('click', '#form2_save', function(){
+$(document).on('click', '#spouseSaveId', function(){
 	updateSpouseDetails();
+});
+$(document).on('click', '.ChildSave', function(){
+	insertChildDetails(this.id);
+});
+$(document).on('click', '.SaveFamilyImage', function(){
+	insertFamilyPhotos(this.id);
 });
 
 
@@ -196,21 +206,99 @@ function updateSpouseDetails(){
 	var spouseName=$('#spouse_Name').val();
 	var spouseAbout=$('#spouse_desc').val();
 	
-	var childDetilsName=$('#child_name').val();
-	var childDetilsAbout=$('#child_about').val();
-	
 	var formData = new FormData();
-	formData.append('file', $('input[type=file]')[0].files[0]);
-	formData.append('file', $('input[type=file]')[1].files[0]);
+	formData.append('file', $('#spouse_photo')[0].files[0]);
 	formData.append("spouseName", spouseName);
-	formData.append("aboutSouse", aboutAbout);
-	formData.append("childName", childDetilsName);
-	formData.append("aboutChild", childDetilsAbout);
+	formData.append("aboutSouse", spouseAbout);
 	
 	jQuery.fn.makeMultipartRequest('POST', "updateSpouseDetails", false, formData, false, 'json', function(data){
 		console.log(data);
+		if(data[200] != null){
+			$("#spouseImgUrl").attr("src", data[200]);
+			alert("spouse saved succesfully");
+		}else{
+			
+		}
 	});
 }
+/*function insertChildDetails(id){
+	if($('#tab_logic tr.addedRows').length > 0){
+		var formData = new FormData();
+		$.each($('#tab_logic tr.addedRows'), function(i, row){
+			var trId = $(row).attr('id');
+			 var childName = $("#"+trId).find("#childNameId"+i).val();
+			 var aboutChild = $("#"+trId).find("#childAboutId"+i).val();
+			 var aboutChild = $("#"+trId).find("#childFileId1")[0].files[0];
+			 formData.append('file', childPhoto);
+			 formData.append("childName", childName);
+			 formData.append("aboutChild", aboutChild);
+		});
+	
+	
+	jQuery.fn.makeMultipartRequest('POST', "insertChildData", false, formData, false, 'json', function(data){
+		console.log(data);
+		if(data){
+			
+		}else{
+			
+		}
+	});
+	}
+}*/
+function insertChildDetails(id){
+		var formData = new FormData();
+var sid = id.replace('child_save','');		
+			var trId = "addr"+sid;
+			 var childName = $("#"+trId).find("#childNameId"+sid).val();
+			 var aboutChild = $("#"+trId).find("#childAboutId"+sid).val();
+			 var childPhoto = $("#"+trId).find("#childFileId"+sid)[0].files[0];
+			 formData.append('file', childPhoto);
+			 formData.append("childName", childName);
+			 formData.append("aboutChild", aboutChild);
+	
+	
+	jQuery.fn.makeMultipartRequest('POST', "insertChildData", false, formData, false, 'json', function(data){
+		console.log(data);
+		if(data[200] != null){
+			alert(data[200]);
+		}else if(data[500] != null){
+			alert(data[500]);
+		}else{
+			alert(data[400]);
+		}
+	});
+}
+
+function insertFamilyPhotos(id){
+	var formData = new FormData();
+var sid = id.replace('photoSaveId','');		
+		var trId = "family_photos"+sid;
+		 var familyPublic = $("#"+trId).find("#familyPhotoPublic"+sid).val();
+		 if(familyPublic == "on"){
+			 familyPublic = 1;
+		 }else{
+			 familyPublic = 0;
+		 }
+		 var aboutImage = $("#"+trId).find("#familyPhotoDesc"+sid).val();
+		 var familyPhoto = $("#"+trId).find("#familyPhoto"+sid)[0].files[0];
+		 formData.append('file', familyPhoto);
+		 formData.append("description", aboutImage);
+		 formData.append("isPublic", familyPublic);
+
+
+jQuery.fn.makeMultipartRequest('POST', "insertFamilyData", false, formData, false, 'json', function(data){
+	console.log(data);
+	if(data[200] != null){
+		alert(data[200]);
+	}else if(data[500] != null){
+		alert(data[500]);
+	}else{
+		alert(data[400]);
+	}
+});
+}
+
+
 
 function registration(){
 	var name =$('#reg_name').val();
@@ -243,12 +331,18 @@ function registration(){
 	formData.append('country', country);
 	
 	jQuery.fn.makeMultipartRequest('POST', "registerUser", false, formData, false, 'json', function(data){
-		console.log(data);
+		//console.log(data);
+		if(data[200] == "200"){
+			alert(data[200]);
+			$('#oldImgPath').attr('src', data[oldImg]);
+			$('#newImgPath').attr('src', data[newImg]);
+		}
 	});
 	return false;
 }
 
-function validatePassword(input){
+
+/*function validatePassword(input){
 	
 	var value = input.value;
 	var reg = /[:\s\\]/;
@@ -261,15 +355,4 @@ function validatePassword(input){
     	input.setCustomValidity('');
     }
     
-}
-
-
-
-
-
- 
-   
-
-
-
-	
+}*/

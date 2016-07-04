@@ -1,7 +1,11 @@
 
 package com.personal.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +27,20 @@ public void saveInfo(PersonalInfo personalInfo){
 }
 
 
+public List<PersonalInfo> getPersonalData(PersonalInfo personalInfo){
+	List<PersonalInfo> finalList = null;  
+	String sql= "select * from personal_info pi, child_info ci  where pi.rollNo = ci.rollNo ";
+	List<PersonalInfo> dbList  = jdbcTemplate.query(sql, new Object [] {personalInfo.getRollNo(), personalInfo.getName()}, new BeanPropertyRowMapper<PersonalInfo>(PersonalInfo.class));
+	if(dbList != null && dbList.size() > 0){
+		finalList = new ArrayList<PersonalInfo>();
+		for (PersonalInfo modifiedObj : dbList){
+			if(modifiedObj.getRollNo() == null){
+				
+			}
+		}	
+	}
+	
+	return null;
+}
 }
 

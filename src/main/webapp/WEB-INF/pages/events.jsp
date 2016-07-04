@@ -10,83 +10,10 @@
 	<div class=" marTop10 panel panel-primary" id="padding-top-xs"
 		style="border-radius: 0; margin-bottom: 0 !important;">
 		<div class="panel-heading minHeight50"
-			style="font-size: 20px; align: center; text-align: center; background-color: #b733ad; border-color: #b733ad">
-			Events</div>
-		<div class="panel-body">
+			style="font-size: 20px; align: center; text-align: center; background-color: #b733ad; border-color: #b733ad">Events</div>
+		<div class="panel-body" style="background:beige;">
 			<div class="panel panel-voilet">
-				<div class="panel panel-body" id='panelBodyId' style="padding: 0px;">
-										<!-- <div class="col-md-12" style="padding: 5px;"> -->
-						<div class="col-md-3">
-							<img class="img-responsive" src="images/three.jpg" />
-						</div>
-						<div class="col-md-9">
-							<span class="events-list-date">14.06.2016</span>
-							<h4>
-								<a href="#" title="Insert event title here"> Insert event
-									title here </a>
-							</h4>
-							<p>EMA organizes various events/projects/conferences in
-								different countries ranging from those focused on developing
-								additional soft skills of our membership to those focused on
-								raising awareness of various issues affecting our societies. Two
-								examples of conferences organized through EMA are Geomundus and
-								Humanities.</p>
-						</div>
-					</div>
-					<div class="col-md-12" style="padding: 5px;">
-						<div class="col-md-3">
-							<img class="img-responsive" src="images/neww.jpg" />
-						</div>
-						<div class="col-md-9">
-							<span class="events-list-date">14.06.2016</span>
-							<h4>
-								<a href="#" title="Insert event title here"> Insert event
-									title here </a>
-							</h4>
-							<p>EMA organizes various events/projects/conferences in
-								different countries ranging from those focused on developing
-								additional soft skills of our membership to those focused on
-								raising awareness of various issues affecting our societies. Two
-								examples of conferences organized through EMA are Geomundus and
-								Humanities.</p>
-						</div>
-					</div>
-					<div class="col-md-12" style="padding: 5px;">
-						<div class="col-md-3">
-							<img class="img-responsive" src="images/neww.jpg" />
-						</div>
-						<div class="col-md-9">
-							<span class="events-list-date">14.06.2016</span>
-							<h4>
-								<a href="#" title="Insert event title here"> Insert event
-									title here </a>
-							</h4>
-							<p>EMA organizes various events/projects/conferences in
-								different countries ranging from those focused on developing
-								additional soft skills of our membership to those focused on
-								raising awareness of various issues affecting our societies. Two
-								examples of conferences organized through EMA are Geomundus and
-								Humanities.</p>
-						</div>
-					</div>
-					<div class="col-md-12" style="padding: 5px;">
-						<div class="col-md-3">
-							<img class="img-responsive" src="images/neww.jpg" />
-						</div>
-						<div class="col-md-9">
-							<span class="events-list-date">14.06.2016</span>
-							<h4>
-								<a href="#" title="Insert event title here"> Insert event
-									title here </a>
-							</h4>
-							<p>EMA organizes various events/projects/conferences in
-								different countries ranging from those focused on developing
-								additional soft skills of our membership to those focused on
-								raising awareness of various issues affecting our societies. Two
-								examples of conferences organized through EMA are Geomundus and
-								Humanities.</p>
-						</div>
-					</div>
+				<div class="panel panel-body"  id='panelBodyId' style="padding: 0px;background:beige;">
 				</div>
 			</div>
 		</div>
@@ -99,12 +26,11 @@ $(document).ready(function(){
 	    return new Array(width - s.toString().length + 1).join(character) + s;
 	}
 	
-	var eventList ='${eventsList}';
 	var eventList =${eventsList};
 	var html = "";
 	if(eventList != ""){
 		$('#panelBodyId').html('');
-		$.each(obj, function(key,val){
+		$.each(eventList, function(key,val){
 			var maxDate = new Date(val.eventDate);
 			var maxDateFormatted =
 			    maxDate.getFullYear() +
@@ -113,16 +39,8 @@ $(document).ready(function(){
 			 html = '<div class="col-md-12" style="padding: 5px;"><div class="col-md-3">'+
 			'<img class="img-responsive" src='+val.eventPhotosPath+'></div><div class="col-md-9">'+
 			'<span class="events-list-date">'+maxDateFormatted+'</span><h4>'+
-			'<a href="#" title="Insert event title here" id='+val.eventId+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4><p>'+val.eventDescription+'</p></div></div>'+
-			'<input type="button" id='+val.eventId+' value="update" onclick="openEventReg(this.id);">';
-/* =======
-		$.each(eventList, function(key,val){
-			 html = '<div class="col-md-12" style="padding: 5px;"><div class="col-md-3">'+
-			'<img class="img-responsive" src='+val.eventPhotosPath+'></div><div class="col-md-9">'+
-			'<span class="events-list-date">'+val.eventDate+'</span><h4>'+
-			'<a href="#" title="Insert event title here" id='+val.id+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4>'+
-			'<p>'+val.eventDescription+'</p></div></div>';
->>>>>>> e8da9d5f5a8d10d8906d820c970963c7645e4914 */
+			'<a href="#" title="Insert event title here" id='+val.eventId+' onclick="openEventReg(this.id);"> '+val.eventName+' </a></h4><p>'+val.eventDescription+'</p></div>'+
+			'<input type="button" id='+val.eventId+' value="Update" onclick="openEventReg(this.id);"></div>';
 			 $('#panelBodyId').append(html);	
 		});
 	}

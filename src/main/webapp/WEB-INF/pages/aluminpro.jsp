@@ -24,11 +24,11 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="images/ema_whd_2016.jpg" alt="Chania"
+				<img src="https://s3-us-west-2.amazonaws.com/alumini-public-images/ema_whd_2016.jpg" alt="Chania"
 					class="img-responsive">
 			</div>
 			<div class="item">
-				<img src="images/startseite_jenni.JPG" alt="Chania">
+				<img src="https://s3-us-west-2.amazonaws.com/alumini-public-images/startseite_jenni.JPG" alt="Chania">
 			</div>
 		</div>
 		<!-- Left and right controls -->
@@ -248,8 +248,10 @@
 	</div>
 </div>
 <script >
+var lRollNo;
 $(document).ready(function(){
 	 var personalData = ${listPersonal};
+	 lRollNo = '${LoginBean.rollNo}'; 
 	getPersonalInfo(personalData);
 });
 </script>

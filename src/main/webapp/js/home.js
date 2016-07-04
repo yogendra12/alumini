@@ -1,14 +1,21 @@
 /**
  * 
  */
-
+$(document).on('click', "#updateRegId", function(){
+	window.location.href = "regHome";
+});
 
 function getPersonalInfo(pData) {
 	$.each(pData,function(i,personalData){
-		
+   		
 		var spData = "";
 		var chData = "";
+		var fImageData ="";
 		var fData = "";
+		var buttonData = "";
+		if (personalData.rollNo == lRollNo){
+			buttonData= '<div><input type="button" style="float:right;" id="updateRegId" value="Update"></div>';   
+		   }
 		if(personalData.spouseName != ""){
 			spData  = '<div class="spouseDetailSpace col-md-12" id="spousedetails-xs">'+
 			'	<div class="panel panel-voilet">'+
@@ -28,77 +35,58 @@ function getPersonalInfo(pData) {
 			'	</div>'+
 			'</div>';
 		}
-		if(personalData.childName != ""){
-		chData = '<div class="childrenDetailSpace col-md-12" id="childdetails-xs">'+
-		'	<div class="panel panel-green">'+
-		'		<div class="panel-heading panelHead-green">Children Details</div>'+
-		'		<div class="panel-body" id="childrenpanelbody-xs">'+
-		'			<img class="col-md-4 col-xs-12" src="images/bird.jpg" />'+
-		'			<div class="col-md-8 col-xs-12">'+
-		'				<div class="col-md-6"></div>'+
-		'				<div class="col-md-6"></div>'+
-		'				<div class="clear-fix"></div>'+
-		'				<div class="col-md-12 col-xs-12" id="childrendesc-xs">'+
-		'					<span class="font-style-heading1">Gujjala Anjaneya vara'+
-		'						prasad</span><br>'+
-		'					<br>'+
-		'					<p>data</p>'+
-		'				</div>'+
-		'			</div>'+
-		'		</div>'+
-		'	</div>'+
-		'</div>';
-		}
-		if(personalData.childName != ""){
-			fData = '<div class="familygallerySpace col-md-12" id="familydetails-xs">'+
-			'	<div class="panel panel-darkBlue">'+
-			'		<div class="panel-heading panelHead-darkBlue">Family gallery</div>'+
-			'		<div class="panel-body" id="familyid">'+
-			'			<div class="carousel slide row" data-ride="carousel"'+
-			'				data-type="multi" data-interval="2000" id="fruitscarousel">'+
-			'				<div class="carousel-inner">'+
-			'					<div class="item active">'+
-			'						<div class="col-md-3 col-sm-4 col-xs-12 familygalleryxs">'+
-			'							<a href="#"><img src="images/students.jpg"'+
-			'								class="img-responsive"></a>'+
-			'						</div>'+
-			'					</div>'+
-			'					<div class="item">'+
-			'						<div class="col-md-3 col-sm-4 col-xs-12 familygalleryxs">'+
-			'							<a href="#"><img src="images/students.jpg"'+
-			'								class="img-responsive"></a>'+
-			'						</div>'+
-			'					</div>'+
-			'					<div class="item">'+
-			'						<div class="col-md-3 col-sm-4 col-xs-12 familygalleryxs">'+
-			'							<a href="#"><img src="images/two.jpg"'+
-			'								class="img-responsive"></a>'+
-			'						</div>'+
-			'					</div>'+
-			'					<div class="item">'+
-			'						<div class="col-md-3 col-sm-4 col-xs-12 familygalleryxs">'+
-			'							<a href="#"><img src="images/two.jpg"'+
-			'								class="img-responsive"></a>'+
-			'						</div>'+
-			'					</div>'+
-			'					<div class="item active">'+
-			'						<div class="col-md-3 col-sm-4 col-xs-12 familygalleryxs">'+
-			'							<a href="#"><img src="images/students.jpg"'+
-			'								class="img-responsive"></a>'+
-			'						</div>'+
-			'					</div>'+
-			'				</div>'+
-			'				<a class="left carousel-control" href="#fruitscarousel"'+
-			'					data-slide="prev"><i'+
-			'					class="glyphicon glyphicon-chevron-left"></i></a> <a'+
-			'					class="right carousel-control" id="rightcor"'+
-			'					href="#fruitscarousel" data-slide="next"><i'+
-			'					class="glyphicon glyphicon-chevron-right"></i></a>'+
-			'			</div>'+
-			'		</div>'+
-			'	</div>'+
+		if(personalData.listChild != null && personalData.listChild.length != 0){
+			
+			var loopData="";
+			$.each(personalData.listChild, function(i,childObj){
+				var lData= '		<div class="panel-body" id="childrenpanelbody-xs">'+
+				'			<img class="col-md-4 col-xs-12" src='+childObj.childPhotoPath+' />'+
+				'			<div class="col-md-8 col-xs-12">'+
+				'				<div class="col-md-6"></div>'+
+				'				<div class="col-md-6"></div>'+
+				'				<div class="clear-fix"></div>'+
+				'				<div class="col-md-12 col-xs-12" id="childrendesc-xs">'+
+				'					<span class="font-style-heading1">'+childObj.childName+'</span><br>'+
+				'					<br>'+
+				'					<p>'+childObj.aboutChild+'</p>'+
+				'				</div>'+
+				'			</div>'+
+				'		</div>';
+				
+				loopData =loopData+lData;	
+			});
+			chData = '<div class="childrenDetailSpace col-md-12" id="childdetails-xs">'+
+			'<div class="childrenDetailSpace col-md-12" id="childdetails-xs">'+
+			'	<div class="panel panel-green">'+
+			'		<div class="panel-heading panelHead-green">Children Details</div>'+loopData+'</div>'+
 			'</div>';
 		}
+		if(personalData.listFamilyImages != null && personalData.listFamilyImages.length != 0){
+			var fImageData   ="";
+			$.each(personalData.listFamilyImages, function(i, fImageObj){
+			var loopData  = '<div class="col-md-3 col-sm-4 col-xs-12 familygalleryxs"><a href="#"><img src="'+fImageObj.imagePath+'" class="img-responsive"></a></div>';
+			fImageData = fImageData+loopData;
+				});
+			
+			fData = '<div class="familygallerySpace col-md-12" id="familydetails-xs"><div class="panel panel-darkBlue">	<div class="panel-heading panelHead-darkBlue">Family gallery</div><div class="panel-body" id="familyid">'+
+
+			'<div class="carousel slide row" data-ride="carousel" data-type="multi" data-interval="2000" id="fruitscarousel">'+
+					
+			'<div class="carousel-inner">'+
+			'<div class="item active id="familyImageData">'+fImageData+'</div>'+
+
+			'<a class="left carousel-control" href="#fruitscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>'+
+			'<a class="right carousel-control" id="rightcor" href="#fruitscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>'+ 
+
+			'</div>'+
+			'		</div>'+	
+			'	</div>'+
+			'</div>';
+		}	
+
+			
+		
+		
 	var htm = '<div class="panel panel-sky " id="marginbtm"><div class="panel-heading panelHead-sky scrollToMyContent" data-parent="#accordion" data-toggle="collapse" href="#collapse1"> <div class="col-md-3 col-xs-12" id="grid-rollnoxs">'
 			+ '<img src='+personalData.oldPhotoPath+' class="imageSpace col-md-6 col-xs-6 gridimage" />'
 			+ '<img src='+personalData.newPhotoPath+' class="imageSpace col-md-6 col-xs-6 gridimage" /> </div>'
@@ -130,7 +118,7 @@ function getPersonalInfo(pData) {
 	'	</div>'+
 	'</div>'+
 	'<div class="clear-fix"></div>'+spData+'<div class="clear-fix"></div>'+chData+'<div class="clear-fix"></div>'+fData+'</div>'+
-'</div></div><div class="clear-fix"></div>';
+'</div>'+buttonData+'</div><div class="clear-fix"></div>';
 	$("#accordion").append(htm).append(data);
 	});
 }
