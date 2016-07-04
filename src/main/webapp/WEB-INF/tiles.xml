@@ -39,6 +39,9 @@
 	<definition name="facreg" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/facultyEntry.jsp" />
 	</definition>
+	<definition name="contactusHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/contactus.jsp" />
+	</definition>
 	
 	<!-- <definition name="partnerLoginHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/partnerLogin.jsp" />

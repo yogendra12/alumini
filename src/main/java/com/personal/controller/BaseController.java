@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -25,9 +26,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.personal.dao.EventsDao;
 import com.personal.dao.FacultyInfoDao;
 import com.personal.dao.PersonalInfoDao;
+import com.personal.model.EmailBean;
 import com.personal.model.Events;
 import com.personal.model.FacultyInfo;
 import com.personal.model.PersonalInfo;
+import com.personal.util.EmailUtil;
 
 @Controller
 public class BaseController {
@@ -37,6 +40,8 @@ public class BaseController {
 	FacultyInfoDao facultyInfoDao;
 	@Autowired
 	EventsDao eventDao;
+	@Autowired
+	ServletContext objContext;
 	Logger log = Logger.getLogger(BaseController.class);
 
 	@RequestMapping(value = "/personal")
@@ -222,5 +227,44 @@ public class BaseController {
 		}
 
 		return "suc";
+	}
+	@RequestMapping(value = "/contactus")
+	public  String contactus(@ModelAttribute FacultyInfo facultyInfo, ModelMap model,
+			HttpServletRequest request) {
+		
+System.out.println("contact us page");
+		return "contactusHome";
+	}
+	@RequestMapping(value = "/contactSendMail")
+	public  String contactSendMail( ModelMap model,	HttpServletRequest request) {
+		String name = null;
+		String email = null;
+		String mobile = null;
+		String message = null;
+		EmailBean emailBean = null;
+		try{
+			
+			 name = request.getParameter("name");
+			 email = request.getParameter("email");
+			 mobile = request.getParameter("mobile");
+			 message = request.getParameter("message");
+			 
+			 emailBean = new EmailBean();
+			PersonalInfo persanal = personalInfoDao.getPersonalInfo("87EC101");
+					 
+			 emailBean.setName(name);
+			 emailBean.setEmail(email);
+			 emailBean.setMessage(mobile);
+			 emailBean.setPassword(persanal.getPassword());	
+			 emailBean.setRollNo(persanal.getRollNo());
+			 
+		EmailUtil emailUtil = new EmailUtil(); 
+		emailUtil.sendEmail(emailBean, objContext);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+System.out.println("contact us page");
+		return "contactus";
 	}
 }
