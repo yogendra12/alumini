@@ -68,6 +68,9 @@
 			
 		</div>
 		</c:if>
+		<c:if test="${not empty LoginBean}">
+		<a href="logout" id="Logout" style="display: block;">Logout</a>
+		</c:if>
 		<!-- forgot pwd -->
 		<div class="col-sm-8" id="forgotpwdid">
 			<div class="pull-left" id="forgotpwdformCloseBtndiv">
@@ -123,6 +126,7 @@
             $("#clickHerebtn").hide();
             $("#loginformid").fadeIn("slow");
         });
+    	
         $("#loginFormCloseBtn").click(function () {
             $("#loginformid").fadeOut("slow");
             $("#clickHerebtn").show();

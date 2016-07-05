@@ -64,6 +64,7 @@ public class BaseController {
 		System.out.println("alumini page...");
 		String json = "";
 		List<PersonalInfo> finalList = null;
+		String publicImages ="null";
 		List<PersonalInfo> listPersonalInfo =   personalInfoDao.getPersonalInfoAll("verified");
 		List<ChildInfo> finalChildList = null;
 		if(listPersonalInfo != null && listPersonalInfo.size() > 0){
@@ -111,6 +112,14 @@ public class BaseController {
 		ObjectMapper mapper = new ObjectMapper();
 		json = mapper.writeValueAsString(finalList);
 		request.setAttribute("listPersonal", json);
+		
+		//public imageslist
+		List<FamilyImages> listPublicImages = familyImagesDao.getFamilyImagesAll("");
+		if(listPublicImages != null && listPublicImages.size() >0 ){
+			mapper = new ObjectMapper();
+			publicImages= mapper.writeValueAsString(listPublicImages);
+		}
+		request.setAttribute("pImages", publicImages);
 		return "alumini";
 	}
 
@@ -164,11 +173,30 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/regHome")
-	public String getRegHomePage(Model model, HttpSession session, HttpServletRequest request) {
+	public String getRegHomePage(Model model, HttpSession session, HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
 		PersonalInfo sessinBean = (PersonalInfo) session.getAttribute("LoginBean");
+		ObjectMapper mapper = null;
+		String childList = "null";
+		String familyImageList = "null";
+		String publicImages = "null";
 		if(sessinBean != null){
 			PersonalInfo localBean = personalInfoDao.getPersonalInfo(sessinBean.getRollNo());
 			request.setAttribute("pBean", localBean );
+			List<ChildInfo> listChild = childInfoDao.getChildrenInfoAll(localBean.getRollNo());
+			if(listChild != null && listChild.size() >0 ){
+				mapper = new ObjectMapper();
+				childList = mapper.writeValueAsString(listChild);
+			}
+			request.setAttribute("cList", childList);
+			
+			List<FamilyImages> listFamilyImages = familyImagesDao.getFamilyImagesAll(localBean.getRollNo());
+			if(listFamilyImages != null && listFamilyImages.size() >0 ){
+				mapper = new ObjectMapper();
+				familyImageList = mapper.writeValueAsString(listFamilyImages);
+			}
+			request.setAttribute("fList", familyImageList);
+			
+			
 			return "reg";
 		}else{
 			return "redirect:aluminiHome";

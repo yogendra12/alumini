@@ -4,6 +4,16 @@
 $(document).on('click', "#updateRegId", function(){
 	window.location.href = "regHome";
 });
+function displayCorosol(pImages){
+	if(pImages != null){
+		$.each(pImages, function(i, obj){
+		var tblRow ='<div class="item"><img src="'+obj.imagePath+'" class=""></div>';
+		var olhtml = '<li data-target="#myCarousel" data-slide-to="'+(i+2)+'"></li>';
+		$(tblRow).appendTo("#carouselId");
+		$(olhtml).appendTo("#carousel_olId");
+	});
+	}
+}
 
 function getPersonalInfo(pData) {
 	$.each(pData,function(i,personalData){

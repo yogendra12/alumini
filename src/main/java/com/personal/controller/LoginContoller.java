@@ -3,6 +3,7 @@
  */
 package com.personal.controller;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +27,7 @@ public class LoginContoller {
 	@Autowired
 	PersonalInfoDao personalInfoDao;
 	Logger log = Logger.getLogger(LoginContoller.class);
-
+	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/validateLogin")
 	public @ResponseBody String validateLogin(HttpServletRequest request,
 			HttpSession session) {
@@ -37,16 +38,31 @@ public class LoginContoller {
 			pass = request.getParameter("pass");
 			if (StringUtils.isNotBlank(rollNo) && StringUtils.isNotBlank(pass)) {
 				PersonalInfo personalInfo = personalInfoDao.getPersonalInfo(rollNo);
-				if (personalInfo.getPassword().equals(pass)  ) {
-					session.setAttribute("LoginBean", personalInfo);
-					return "Succ";
-					
+				if (personalInfo != null &&  personalInfo.getPassword().equals(pass)) {
+						session.setAttribute("LoginBean", personalInfo);
+						personalInfo.setIsVerified(1);
+						boolean isUpdate = personalInfoDao.updatePersonalInfo(personalInfo);
+						if(isUpdate){
+							log.info("Email has been verified successfully.");
+						}
+						/*EmailBean bean = new EmailBean();
+						bean.setEmail(email);
+						EmailUtil.sendEmail(null, objContext);*/
+						return "Succ";
 				}
 			}
-			return "";
 		} catch (Exception e) {
 			log.error("Exception in validateLogin()", e);
 		}
 		return "";
+	}
+	@RequestMapping(value = "/logout")
+	public String logOut(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.removeAttribute("userId");
+			session.invalidate();
+		}
+		return "redirect:aluminiHome";
 	}
 }

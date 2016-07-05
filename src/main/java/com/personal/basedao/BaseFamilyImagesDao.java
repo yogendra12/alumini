@@ -20,7 +20,10 @@ public class BaseFamilyImagesDao {
 			sBuffer.append("SELECT * from family_images ");
 			if (StringUtils.isNotBlank(rollNo)) {
 				sBuffer.append(" where rollNo ='" + rollNo + "' and isPublic=1");
+			}else {
+				sBuffer.append(" where isPublic=1");
 			}
+			
 			System.out.println(sBuffer.toString());
 			retlist = jdbcTemplate.query(sBuffer.toString(),
 					ParameterizedBeanPropertyRowMapper
@@ -51,5 +54,18 @@ public class BaseFamilyImagesDao {
 		return isSave;
 	}
 	
+	public boolean deleteFamilyInfo(int familyImgId) {
+		boolean isDelete = false;
+		try {
+			String sql = "DELETE FROM  family_images WHERE id=?";
+			int delete = jdbcTemplate.update(sql, new Object[] { familyImgId });
+			if (delete > 0) {
+				isDelete = true;
+			}
+		} catch (Exception e) {
+
+		}
+		return isDelete;
+	}
 	
 }

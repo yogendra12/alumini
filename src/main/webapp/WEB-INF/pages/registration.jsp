@@ -213,7 +213,7 @@
 						var fileInput1 = document.getElementById('action_json');
 						var fileDisplayArea1 = document
 								.getElementById('action_jsondisplay');
-
+					if(fileInput != null){
 						fileInput.addEventListener(
 										'change',
 										function(e) {
@@ -251,6 +251,8 @@
 												fileDisplayArea.innerText = "File not supported!"
 											}
 										});
+					}
+					if(fileInput1 != null){
 						fileInput1
 								.addEventListener(
 										'change',
@@ -289,7 +291,7 @@
 												fileDisplayArea1.innerText = "File not supported!"
 											}
 										});
-
+					}
 						//@naresh action dynamic childs
 						var next = 0;
 						$("#add-more")
@@ -553,6 +555,11 @@
                             <div class="panel-heading panelHead-green">
                                 Child Details
                             </div>
+                            
+                            <div id='userdata'>
+                            <table class="table table-bordered table-hover" id='itemContainer'>
+                                    </table>
+							</div>
                             <div class="panel-body">
                                 <table class="table table-bordered table-hover" id="tab_logic">
                                     <thead>
@@ -574,7 +581,9 @@
                                             </th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody>
+                                    
                                         <tr class='addedRows' id='addr0'>
                                             <!-- <td>
                                                 <p class="checkboxpadding"><input type="checkbox" id="child_select" required aria-required="true" name="number" value="select"/></p>
@@ -607,6 +616,10 @@
                             <div class="panel-heading panelHead-darkBlue">
                                 Upload family Photos
                             </div>
+                               <div id='userdata1'>
+                            <table class="table table-bordered table-hover" id='itemContainer1'>
+                                    </table>
+							</div>
                             <div class="panel-body" id="paddingright-xs">
                                 <div class="col-md-12 paddingzeroxs">
                                     <table class="table table-bordered table-hover" id="tab_logic_family_photos">
@@ -686,7 +699,15 @@
 $(document).ready(function(){
 	//var rollNo1 = ${LoginBean.rollNo};
 	//$("#reg_rollno").val(rollNo1);	
-	//$("#reg_rollno").css('disabled', 'disabled');	
+	//$("#reg_rollno").css('disabled', 'disabled');
+	var childData = ${cList};
+	if(childData != null){
+		dispalyUserData(childData);	
+	}
+	var familyList = ${fList};
+	if(familyList != null){
+		displayFamilyData(familyList);
+	}
 })
 
 

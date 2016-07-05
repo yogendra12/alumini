@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	
 	//document.getElementById("reg_pass").oninvalid = validatePassword(document.getElementById("reg_pass"));
 	
 	/*$('#reg_pass').on('blur',function(){
@@ -94,7 +95,7 @@ $(document).ready(function () {
 var fileInput1 = document.getElementById('action_json');
     	var fileDisplayArea1 = document.getElementById('action_jsondisplay');
         
-
+if(fileInput != null ){
 		    	fileInput.addEventListener('change', function(e) {
 			var file = fileInput.files[0];
 			var textType = /text.*/;
@@ -127,7 +128,10 @@ var fileInput1 = document.getElementById('action_json');
 				fileDisplayArea.innerText = "File not supported!"
 			}
 		});
-    fileInput1.addEventListener('change', function(e) {
+}
+    
+if(fileInput1 != null)
+fileInput1.addEventListener('change', function(e) {
     		var file = fileInput1.files[0];
 			var textType = /text.*/;
 
@@ -259,15 +263,24 @@ var sid = id.replace('child_save','');
 	
 	jQuery.fn.makeMultipartRequest('POST', "insertChildData", false, formData, false, 'json', function(data){
 		console.log(data);
-		if(data[200] != null){
+		dispalyUserData(data);
+			$("#"+trId).find("#childNameId"+sid).val("");
+		    $("#"+trId).find("#childAboutId"+sid).val("");
+		    $("#"+trId).find("#childFileId"+sid).val('');
+//		dispalyUserData(data);
+		/*if(data[200] != null){
 			alert(data[200]);
+			dispalyUserData(data[200]);
 		}else if(data[500] != null){
 			alert(data[500]);
 		}else{
 			alert(data[400]);
-		}
+		}*/
 	});
 }
+
+	
+
 
 function insertFamilyPhotos(id){
 	var formData = new FormData();
@@ -288,13 +301,10 @@ var sid = id.replace('photoSaveId','');
 
 jQuery.fn.makeMultipartRequest('POST', "insertFamilyData", false, formData, false, 'json', function(data){
 	console.log(data);
-	if(data[200] != null){
-		alert(data[200]);
-	}else if(data[500] != null){
-		alert(data[500]);
-	}else{
-		alert(data[400]);
-	}
+	displayFamilyData(data);
+		$("#"+trId).find("#familyPhotoDesc"+sid).val('');
+		$("#"+trId).find("#familyPhoto"+sid).val('');
+		$("#"+trId).find("#familyPhotoPublic"+sid).attr('checked', false);;	
 });
 }
 
@@ -341,7 +351,84 @@ function registration(){
 	return false;
 }
 
+function forDelete(id) {
+	var count = 0;
+		var deleteId = id;
+		$("#itemContainer tr").remove();
+		$("#itemContainer tr td").remove();
+		$.ajax({
+					type : "POST",
+					url : "deleteChildData",
+					data : "childId=" + deleteId,
+					dataType : "json",
+					success : function(response) {
+						//alert(CatList);
+						dispalyUserData(response);
+					}
+			 });
+}
+function forDeleteFamilyImg(id) {
+	var count = 0;
+		var deleteId = id;
+		$("#itemContainer1 tr").remove();
+		$("#itemContainer1 tr td").remove();
+		$.ajax({
+					type : "POST",
+					url : "deleteFamilyData",
+					data : "id=" + deleteId,
+					dataType : "json",
+					success : function(response) {
+						//alert(CatList);
+						displayFamilyData(response);
+					}
+			 });
+}
 
+
+function dispalyUserData(data){
+	if(data != ""){
+		$("#itemContainer tr").remove();
+		$("#itemContainer tr td").remove();
+	$.each(data,
+			function(i, obj) {
+				var tblRow = "<tr class='text-center namewidth'>"
+					 + "<td>"+ obj.childName+ "</td>"
+						+ "<td > <img class='imageSpace photofieldwidth photofieldwidthxs' src="+obj.childPhotoPath+" ></td>"
+						+ "<td>"+ obj.aboutChild +"</td>"
+						+ "<td >"
+						+ "<a href='javascript:void(0)' id='"
+						+ obj.childId
+						+ "' onclick='forDelete(this.id)' class='ico del'>Delete</a>"
+						+ '</td>'
+						 + '</tr>';
+				$(tblRow).appendTo("#itemContainer");
+
+				
+			});
+	}
+}
+
+function displayFamilyData(data){
+	if(data != ""){
+		$("#itemContainer1 tr").remove();
+		$("#itemContainer1 tr td").remove();
+	$.each(data,
+			function(i, obj) {
+				var tblRow = "<tr class='text-center namewidth'>"
+						+ "<td > <img class='imageSpace photofieldwidth photofieldwidthxs' src="+obj.imagePath+" ></td>"
+						+ "<td>"+ obj.description +"</td>"
+						+ "<td >"
+						+ "<a href='javascript:void(0)' id='"
+						+ obj.id
+						+ "' onclick='forDeleteFamilyImg(this.id)' class='ico del'>Delete</a>"
+						+ '</td>'
+						 + '</tr>';
+				$(tblRow).appendTo("#itemContainer1");
+
+				
+			});
+	}
+}
 /*function validatePassword(input){
 	
 	var value = input.value;

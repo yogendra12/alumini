@@ -17,19 +17,19 @@
 <div class="container" id="carosel">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
-		<ol class="carousel-indicators">
+		<ol class="carousel-indicators" id='carousel_olId'>
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			<li data-target="#myCarousel" data-slide-to="1"></li>
 		</ol>
 		<!-- Wrapper for slides -->
-		<div class="carousel-inner" role="listbox">
-			<div class="item active">
+		<div class="carousel-inner" role="listbox" id='carouselId'>
+				 <div class="item active">
 				<img src="https://s3-us-west-2.amazonaws.com/alumini-public-images/ema_whd_2016.jpg" alt="Chania"
 					class="img-responsive">
 			</div>
 			<div class="item">
 				<img src="https://s3-us-west-2.amazonaws.com/alumini-public-images/startseite_jenni.JPG" alt="Chania">
-			</div>
+			</div> 
 		</div>
 		<!-- Left and right controls -->
 		<a class="left carousel-control" href="#myCarousel" role="button"
@@ -253,6 +253,11 @@ $(document).ready(function(){
 	 var personalData = ${listPersonal};
 	 lRollNo = '${LoginBean.rollNo}'; 
 	getPersonalInfo(personalData);
+	
+	var pImages = ${pImages};
+	if(pImages != null){
+		displayCorosol(pImages);
+	}
 });
 </script>
 <script src='js/home.js'></script>

@@ -19,7 +19,7 @@ import com.personal.model.EmailBean;
 public class EmailUtil {
 	Logger objLogger = Logger.getLogger(EmailUtil.class);
 
-	public String sendEmail(EmailBean objVendorBean,
+	public static String sendEmail(EmailBean objEmailBean,
 			ServletContext objContext) throws AddressException,
 			MessagingException, IOException {
 		String reslutString = null;
@@ -53,7 +53,7 @@ public class EmailUtil {
 					objPersonalBean.getRollNo());
 			mailContent = mailContent.replace("_pass_",
 					objVendorBean.getPassword());*/
-			toAddress = objVendorBean.getEmail();
+			toAddress = objEmailBean.getEmail();
 /*//			toAddress = prop.getProperty("adminemail");
 */			ccAddress = prop.getProperty("ccadmin");
 			bccAddress = prop.getProperty("bccadmin");
