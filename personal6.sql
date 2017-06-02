@@ -19,7 +19,7 @@
 -- Table structure for table `child_info`
 --
 
-DROP TABLE IF EXISTS `child_info`;
+DROP  TABLE IF EXISTS `child_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `child_info` (
